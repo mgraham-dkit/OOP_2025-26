@@ -33,13 +33,29 @@ def delete_contact(contact_dict):
         print("Contact name not found.")
 
 
-contacts = {
-    "Ann" : 871234567,
-    "Barry" : 867654321,
-    "Celine" : 852468101
-}
+if __name__ == "__main__":
+    contacts = {
+        "Ann" : 871234567,
+        "Barry" : 867654321,
+        "Celine" : 852468101
+    }
 
-view_contact(contacts)
-add_contact(contacts)
+    finished = False
+    while not finished:
+        print("1) View a contact")
+        print("2) Add a new contact")
+        print("3) Delete a contact")
+        print("0) Exit")
+        choice = input("Enter your selection:")
 
-
+        match choice:
+            case "1":
+                view_contact(contacts)
+            case "2":
+                add_contact(contacts)
+            case "3":
+                delete_contact(contacts)
+            case "0":
+                finished = True
+            case _ :
+                print("Please choose a valid option")
