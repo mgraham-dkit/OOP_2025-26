@@ -1,37 +1,45 @@
+def view_contact(contact_dict):
+    name = input(f"Please enter the contact's name: ")
+    number = contact_dict.get(name)
+    print(f"{name} : {number}")
+
+def add_contact(contact_dict):
+    finished = False
+    while not finished:
+        new_contact_name = input("Please enter the new name to be added: ")
+        new_contact_num = int(input(f"Please enter {new_contact_name}'s number: "))
+
+        if contact_dict.get(new_contact_name) is None:
+            contact_dict[new_contact_name] = new_contact_num
+            finished = True
+        else:
+            print(f"Contact already exists! {new_contact_name} : {contact_dict[new_contact_name]}")
+            choice = input("Do you wish to try again??? (y to continue, any other key to end)")
+            if choice != "y" and choice != "Y":
+                finished = True
+
+def delete_contact(contact_dict):
+    name = input("Please enter the name of the contact to be deleted: ")
+    if contact_dict.get(name) is not None:
+        choice = input("Do you wish to \n1) Wipe contact phone number\n2) Delete contact from contacts\n")
+        if choice == "1":
+            contact_dict[name] = None
+        elif choice == "2":
+            # contact_dict.pop(name)
+            del contact_dict[name]
+        else:
+            print("Invalid option selected. Delete cannot be performed.")
+    else:
+        print("Contact name not found.")
+
+
 contacts = {
     "Ann" : 871234567,
     "Barry" : 867654321,
     "Celine" : 852468101
 }
 
-name = input(f"Please enter the contact's name: ")
-number = contacts.get(name)
-print(f"{name} : {number}")
-
-finished = False
-while not finished:
-    new_contact_name = input("Please enter the new name to be added: ")
-    new_contact_num = int(input(f"Please enter {new_contact_name}'s number: "))
-
-    if contacts.get(new_contact_name) is None:
-        contacts[new_contact_name] = new_contact_num
-        finished = True
-    else:
-        print(f"Contact already exists! {new_contact_name} : {contacts[new_contact_name]}")
-        choice = input("Do you wish to try again??? (y to continue, any other key to end)")
-        if choice != "y" and choice != "Y":
-            finished = True
+view_contact(contacts)
+add_contact(contacts)
 
 
-name = input("Please enter the name of the contact to be deleted: ")
-if contacts.get(name) is not None:
-    choice = input("Do you wish to \n1) Wipe contact phone number\n2) Delete contact from contacts\n")
-    if choice == "1":
-        contacts[name] = None
-    elif choice == "2":
-        # contacts.pop(name)
-        del contacts[name]
-    else:
-        print("Invalid option selected. Delete cannot be performed.")
-else:
-    print("Contact name not found.")
