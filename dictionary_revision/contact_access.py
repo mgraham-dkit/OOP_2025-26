@@ -22,4 +22,16 @@ while not finished:
         if choice != "y" and choice != "Y":
             finished = True
 
-print(contacts)
+
+name = input("Please enter the name of the contact to be deleted: ")
+if contacts.get(name) is not None:
+    choice = input("Do you wish to \n1) Wipe contact phone number\n2) Delete contact from contacts\n")
+    if choice == "1":
+        contacts[name] = None
+    elif choice == "2":
+        # contacts.pop(name)
+        del contacts[name]
+    else:
+        print("Invalid option selected. Delete cannot be performed.")
+else:
+    print("Contact name not found.")
