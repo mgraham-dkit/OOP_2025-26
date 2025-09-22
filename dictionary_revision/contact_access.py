@@ -51,6 +51,25 @@ def authenticate_user(users_dict):
             print("Invalid username/password. Please try again.")
 
 
+def display_contact_names(contacts_dict):
+    for i, name in enumerate(contacts_dict):
+        print(f"{i}) {name}")
+
+
+def display_contact_numbers(contacts_dict):
+    for i, number in enumerate(contacts_dict.values()):
+        print(f"{i}) {number}")
+
+
+def display_main_menu():
+    print("1) View a contact")
+    print("2) Add a new contact")
+    print("3) Delete a contact")
+    print("4) View all contact names")
+    print("5) View all contact numbers")
+    print("0) Exit")
+
+
 if __name__ == "__main__":
 
     users = {
@@ -69,10 +88,7 @@ if __name__ == "__main__":
 
     finished = False
     while not finished:
-        print("1) View a contact")
-        print("2) Add a new contact")
-        print("3) Delete a contact")
-        print("0) Exit")
+        display_main_menu()
         choice = input("Enter your selection:")
 
         match choice:
@@ -82,6 +98,10 @@ if __name__ == "__main__":
                 add_contact(contacts)
             case "3":
                 delete_contact(contacts)
+            case "4":
+                display_contact_names(contacts)
+            case "5":
+                display_contact_numbers(contacts)
             case "0":
                 finished = True
             case _ :
