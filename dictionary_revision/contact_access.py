@@ -32,13 +32,40 @@ def delete_contact(contact_dict):
     else:
         print("Contact name not found.")
 
+def authenticate(users_dict, username, password):
+    if username.lower() in users_dict:
+        if users_dict[username] == password:
+            return True
+
+    return False
+
+
+def authenticate_user(users_dict):
+    not_authenticated = True
+    while not_authenticated:
+        username = input("Please enter your username: ")
+        password = input("Please enter your password: ")
+        if authenticate(users_dict, username, password):
+            not_authenticated = False
+        else:
+            print("Invalid username/password. Please try again.")
+
 
 if __name__ == "__main__":
+
+    users = {
+        "admin" : "root",
+        "michelle" : "secret",
+        "hannah" : "password123!"
+
+    }
     contacts = {
         "Ann" : 871234567,
         "Barry" : 867654321,
         "Celine" : 852468101
     }
+
+    authenticate_user(users)
 
     finished = False
     while not finished:
