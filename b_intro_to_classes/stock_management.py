@@ -3,6 +3,12 @@ from stock import StockItem
 def get_prod_code(stock_item):
     return stock_item.prod_code
 
+def get_by_prod_code(stock_items, prod_code):
+    for item in stock_items:
+        if item.prod_code == prod_code:
+            return item
+
+    return None
 
 def find_max_profit_item(stock_items):
     max_profit = 0
@@ -35,11 +41,24 @@ for i in range(2):
     unit = create_stock_item()
     stock.append(unit)
 
+print("Stock Items in system:")
 for s in stock:
     s.display()
     print(f"Profit: €{s.calc_profit()}")
-
+print("---------------------------")
 
 stock.sort(key=get_prod_code)
+
+print("Stock Items in system:")
 for s in stock:
     s.display()
+    print(f"Profit: €{s.calc_profit()}")
+print("---------------------------")
+
+code = input("Enter the code to be searched for: ")
+match = get_by_prod_code(stock, code)
+if match is not None:
+    print("Match: ")
+    match.display()
+else:
+    print("No match found")
