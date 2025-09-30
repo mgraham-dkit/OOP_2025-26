@@ -1,5 +1,8 @@
 from stock import StockItem
 
+def get_prod_code(stock_item):
+    return stock_item.prod_code
+
 
 def find_max_profit_item(stock_items):
     max_profit = 0
@@ -35,3 +38,8 @@ for i in range(2):
 for s in stock:
     s.display()
     print(f"Profit: €{s.calc_profit()}")
+
+
+stock.sort(key=get_prod_code)
+for s in stock:
+    s.display()
