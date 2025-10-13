@@ -43,12 +43,12 @@ def authenticate(users_dict, username, password):
 def authenticate_user(users_dict):
     not_authenticated = True
     while not_authenticated:
-        username = input("Please enter your username: ")
-        password = input("Please enter your password: ")
+        username = input("Please enter your _username: ")
+        password = input("Please enter your __password: ")
         if authenticate(users_dict, username, password):
             not_authenticated = False
         else:
-            print("Invalid username/password. Please try again.")
+            print("Invalid _username/__password. Please try again.")
 
 
 def display_contact_names(contacts_dict):

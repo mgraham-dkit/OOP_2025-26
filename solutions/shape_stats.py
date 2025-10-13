@@ -1,4 +1,5 @@
 from shapes import Rectangle
+import random
 
 
 # Function to create a new rectangle based on user input
@@ -11,6 +12,19 @@ def create_rectangle():
 
     # Build a rectangle from the supplied values
     user_rectangle = Rectangle(length, width, colour)
+
+    # Return the new rectangle back to the program to be used elsewhere
+    return user_rectangle
+
+# Function to create a new rectangle based on user input
+def create_colourless_rectangle():
+    print("Now creating a rectangle!")
+    # Take in the components to make a rectangle
+    length = int(input("Enter length: "))
+    width = int(input("Enter width: "))
+
+    # Build a rectangle from the supplied values
+    user_rectangle = Rectangle(length, width)
 
     # Return the new rectangle back to the program to be used elsewhere
     return user_rectangle
@@ -57,7 +71,13 @@ rectangles = []
 # This uses a function to create a rectangle for us
 # We just save the result
 for i in range(5):
-    rect = create_rectangle()
+    random_num = random.randint(1, 10)
+
+    if random_num % 2 == 0:
+        rect = create_rectangle()
+    else:
+        rect = create_colourless_rectangle()
+
     print(f"Rectangle created: {rect.display()}")
     rectangles.append(rect)
 

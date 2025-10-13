@@ -3,13 +3,13 @@ class Container:
         self.name = name
         self.port = port
         self.env = env
-        self.username = username
-        self.password = password
+        self._username = username
+        self.__password = password
 
     def change_password(self, user, old_pass, new_pass):
         # LOGIC!!
-        if old_pass == self.password and user == self.username:
-            self.password = new_pass
+        if old_pass == self.__password and user == self._username:
+            self.__password = new_pass
             return True
         else:
             return False

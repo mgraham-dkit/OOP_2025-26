@@ -14,9 +14,11 @@ def create_container():
 
 
 containers = []
-for i in range(5):
+for i in range(1):
     c = create_container()
     containers.append(c)
 
 for c in containers:
+    print(c.__password)
     c.display()
+

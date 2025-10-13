@@ -2,7 +2,7 @@ from statistics import quantiles
 
 
 class StockItem:
-    def __init__(self, prod_code, name, cost_price, sale_price, quantity, description):
+    def __init__(self, prod_code, name, cost_price, sale_price, quantity, description="Default description"):
         self.prod_code = prod_code
         self.name = name
         self.cost_price = cost_price
