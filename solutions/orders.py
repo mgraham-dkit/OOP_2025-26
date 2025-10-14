@@ -18,3 +18,5 @@ class Pizza:
         else:
             return False
 
+    # todo: get_allowable_sizes()
+    # todo: check_size(size)
