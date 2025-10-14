@@ -8,6 +8,10 @@ class Pizza:
         else:
             self._size = Pizza._allowable_sizes[1]
 
+    def display(self):
+        toppings = ", ".join(self.toppings)
+        print(f"{self._size} pizza with {toppings} toppings")
+
     def get_size(self):
         return self._size
 
@@ -18,5 +22,13 @@ class Pizza:
         else:
             return False
 
-    # todo: get_allowable_sizes()
-    # todo: check_size(size)
+    @staticmethod
+    def get_allowable_sizes():
+        return list(Pizza._allowable_sizes)
+
+    @staticmethod
+    def check_size(size):
+        if size.lower() in Pizza._allowable_sizes:
+            return True
+        else:
+            return False
