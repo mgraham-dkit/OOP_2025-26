@@ -62,6 +62,13 @@ def get_most_expensive(order_data):
 
     return max_nickname, max_pizza
 
+def calc_total_cost(order_data):
+    total_cost = 0
+    for pizza in order_data.values():
+        total_cost += pizza.calc_price()
+
+    return total_cost
+
 
 order = {}
 
@@ -84,3 +91,6 @@ expensive_nickname, most_expensive_pizza = get_most_expensive(order)
 print(f"Most expensive pizza in your order: {expensive_nickname} costing {most_expensive_pizza.calc_price()}")
 print("Details: ")
 most_expensive_pizza.display()
+
+total_price = calc_total_cost(order)
+print(f"Your total is: €{total_price}")
