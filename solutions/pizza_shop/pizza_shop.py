@@ -38,7 +38,7 @@ def create_pizza():
 
 def display_order(order_data):
     print("---------------------------")
-    for name, pizza in enumerate(order_data.items()):
+    for name, pizza in order_data.items():
         print(f"{name} pizza:")
         pizza.display()
         print(f"Cost: €{pizza.calc_price()}")
