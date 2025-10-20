@@ -36,6 +36,14 @@ def create_pizza():
 
     return pizza
 
+def display_order(order_data):
+    print("---------------------------")
+    for name, pizza in enumerate(order_data.items()):
+        print(f"{name} pizza:")
+        pizza.display()
+        print(f"Cost: €{pizza.calc_price()}")
+    print("---------------------------")
+
 
 order = {}
 
@@ -52,3 +60,7 @@ while add_pizza:
     new_pizza = create_pizza()
     new_pizza.display()
     order[nickname] = new_pizza
+
+display_order(order)
+
+
