@@ -44,6 +44,24 @@ def display_order(order_data):
         print(f"Cost: €{pizza.calc_price()}")
     print("---------------------------")
 
+def get_most_expensive(order_data):
+    if not order_data:
+        return None
+
+    max = list(order_data.items())[0]
+    max_nickname = max[0]
+    max_pizza = max[1]
+    max_price = max_pizza.calc_price()
+
+    for nickname, pizza in order_data.items():
+        current_price = pizza.calc_price()
+        if current_price > max_price:
+            max_pizza = pizza
+            max_price = current_price
+            max_nickname = nickname
+
+    return max_nickname, max_pizza
+
 
 order = {}
 
@@ -62,5 +80,7 @@ while add_pizza:
     order[nickname] = new_pizza
 
 display_order(order)
-
-
+expensive_nickname, most_expensive_pizza = get_most_expensive(order)
+print(f"Most expensive pizza in your order: {expensive_nickname} costing {most_expensive_pizza.calc_price()}")
+print("Details: ")
+most_expensive_pizza.display()
