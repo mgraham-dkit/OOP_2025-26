@@ -40,3 +40,9 @@ class Pizza:
             return True
         else:
             return False
+
+    def calc_price(self):
+        base_price = Pizza._SIZE_PRICE_INDEX[self._size]
+        topping_price = len(self.toppings) * Pizza._TOPPING_COST
+
+        return base_price + topping_price
