@@ -17,8 +17,7 @@ class Pizza:
             self._size = Pizza._STANDARD_SIZE
 
     def display(self):
-        toppings = ", ".join(self.toppings)
-        print(f"{self._size} pizza with {toppings} toppings")
+        print(self)
 
     def get_size(self):
         return self._size
@@ -29,6 +28,10 @@ class Pizza:
             return True
         else:
             return False
+
+    def __str__(self):
+        toppings = ", ".join(self.toppings)
+        return f"{self._size} pizza with {toppings} toppings"
 
     @staticmethod
     def get_allowable_sizes():

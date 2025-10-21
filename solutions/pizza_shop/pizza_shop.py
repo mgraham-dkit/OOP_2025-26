@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from orders import Pizza
 
 
@@ -69,6 +71,16 @@ def calc_total_cost(order_data):
 
     return total_cost
 
+def save_order(order_dict, username):
+    timestamp = datetime.now()
+    text_timestamp = f"{timestamp.day}-{timestamp.month}-{timestamp.year}"
+    file_name = f"{username}_{text_timestamp}.txt"
+    #file_name = "michelle.txt"
+    with open(file_name, 'w') as writer:
+        for nick, pizza in order_dict.items():
+            writer.write(f"{nick}: {pizza}\n")
+
+
 
 order = {}
 
@@ -87,10 +99,16 @@ while add_pizza:
     order[nickname] = new_pizza
 
 display_order(order)
-expensive_nickname, most_expensive_pizza = get_most_expensive(order)
-print(f"Most expensive pizza in your order: {expensive_nickname} costing {most_expensive_pizza.calc_price()}")
-print("Details: ")
-most_expensive_pizza.display()
+result = get_most_expensive(order)
+if result is not None:
+    expensive_nickname, most_expensive_pizza = result
+    print(f"Most expensive pizza in your order: {expensive_nickname} costing {most_expensive_pizza.calc_price()}")
+    print("Details: ")
+    most_expensive_pizza.display()
+else:
+    print("No pizzas were ordered")
 
 total_price = calc_total_cost(order)
 print(f"Your total is: €{total_price}")
+
+save_order(order, username)
