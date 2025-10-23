@@ -86,6 +86,10 @@ order = {}
 
 username = input("Enter your username: ")
 
+hard_coded_pizza = Pizza(["ham", "pineapple", "marshmallow fluff"], "large")
+order["default"] = hard_coded_pizza
+pizza_list = [hard_coded_pizza]
+
 add_pizza = True
 while add_pizza:
     choice = input("Do you wish to select a pizza? (Y/y for yes, any other key to close order)")
