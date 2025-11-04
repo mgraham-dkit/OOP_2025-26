@@ -58,7 +58,7 @@ class User:
         if not other:
             return False
 
-        return self._username.tolower() == other.get_username().tolower()
+        return self._username.lower() == other.get_username().lower()
 
 
     def __ne__(self, other: User):
