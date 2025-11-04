@@ -1,5 +1,5 @@
 class User:
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str):
         if not username:
             print("Username cannot be blank!")
 
@@ -9,7 +9,7 @@ class User:
         self._password = password
 
     @staticmethod
-    def validate_password(password):
+    def validate_password(password: str):
         if len(password) < 8:
             print("Password must contain at least 8 characters")
             return False
@@ -29,7 +29,7 @@ class User:
         return True
 
 
-    def change_password(self, old_pass, new_pass):
+    def change_password(self, old_pass: str, new_pass: str):
         if old_pass != self._password:
             return False
 
@@ -39,7 +39,7 @@ class User:
         self._password = new_pass
         return True
 
-    def check_credentials(self, password):
+    def check_credentials(self, password: str):
         if self._password == password:
             return True
 
@@ -54,14 +54,14 @@ class User:
     def get_username(self):
         return self._username
 
-    def __eq__(self, other):
+    def __eq__(self, other: User):
         if not other:
             return False
 
         return self._username.tolower() == other.get_username().tolower()
 
 
-    def __ne__(self, other):
+    def __ne__(self, other: User):
         if self == other:
             return False
         else:
