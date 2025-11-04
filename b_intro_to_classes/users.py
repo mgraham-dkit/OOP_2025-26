@@ -39,3 +39,14 @@ class User:
         self._password = new_pass
         return True
 
+    def check_credentials(self, password):
+        if self._password == password:
+            return True
+
+        return False
+
+    def __str__(self):
+        return f"Username: {self._username}"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}[_username={self._username}, _password=********]"
