@@ -14,15 +14,15 @@ class User:
             print("Password must contain at least 8 characters")
             return False
 
-        if not password.isDigit():
+        if not any(char.isdigit() for char in password):
             print("Password must contain at least one digit!")
             return False
 
-        if not password.isUpper():
+        if not any(char.isupper() for char in password):
             print("Password must contain at least one uppercase!")
             return False
 
-        if not password.isLower():
+        if not any(char.islower() for char in password):
             print("Password must contain at least one lower!")
             return False
 
