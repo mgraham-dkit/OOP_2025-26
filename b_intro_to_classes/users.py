@@ -50,3 +50,19 @@ class User:
 
     def __repr__(self):
         return f"{self.__class__.__name__}[_username={self._username}, _password=********]"
+
+    def get_username(self):
+        return self._username
+
+    def __eq__(self, other):
+        if not other:
+            return False
+
+        return self._username.tolower() == other.get_username().tolower()
+
+
+    def __ne__(self, other):
+        if self == other:
+            return False
+        else:
+            return True
