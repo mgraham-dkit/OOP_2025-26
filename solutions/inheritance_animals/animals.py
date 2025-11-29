@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 class Animal:
-    def __init__(self, dob: str, weight: float, name = "Harold"):
+    def __init__(self, dob: str, weight: float, name:str = "Harold"):
         if name is None:
             name = "Harold"
         self.name = name
@@ -23,7 +23,7 @@ class Animal:
         if self.calc_age() < 0:
             self.dob = datetime.now()
 
-    def display(self):
+    def display(self) -> None:
         print(f"{self.__class__.__name__}:")
         print(f"Name:\t\t {self.name}")
         print(f"Age:\t\t {self.calc_age()}")
@@ -37,6 +37,20 @@ class Animal:
         age = (now - self.dob).days
         # Divide the age in days by 365 (rounded down to whole integer) to get age in years
         return age // 365
+
+
+class Dog(Animal):
+    def __init__(self, dob: str, weight: float, breed:str, name:str = "Harold", personality: str = "Happy"):
+        super().__init__(dob, weight, name)
+        self.breed = breed
+        if not personality:
+            personality = "Happy"
+        self.personality = personality
+
+    def display(self) -> None:
+        super().display()
+        print(f"Breed:\t {self.breed}")
+        print(f"Personality: {self.personality}")
 
 
 if __name__ == "__main__":

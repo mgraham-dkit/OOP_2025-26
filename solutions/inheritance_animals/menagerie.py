@@ -1,6 +1,7 @@
 import random
 
-from animals import Animal
+from animals import Animal, Dog
+
 
 def create_animal() -> Animal:
     # Take in the parts of the animal
@@ -16,6 +17,7 @@ def display_animals(animal_list: list[Animal]) -> None:
     for current_animal in animal_list:
         # Ask it to show its information on console
         current_animal.display()
+        print()
 
 def get_below_age(animal_list: list[Animal], age: int) -> list[Animal]:
     # Create a list to hold all animals with age <= specified age
@@ -43,6 +45,12 @@ if __name__ == "__main__":
     for i in range(2):
         animal = create_animal()
         animals.append(animal)
+
+    # Create two hard-coded Dog objects and add to list
+    dog1 = Dog("14/03/24", 2.23, "Chihuahua","Jackson", "Yappy")
+    animals.append(dog1)
+    dog2 = Dog("24/07/21", 5.18, "Poodle", "Bruiser", "Aggressive")
+    animals.append(dog2)
 
     # Shuffle the list of animals
     random.shuffle(animals)
