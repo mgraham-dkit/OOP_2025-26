@@ -9,6 +9,39 @@ def get_active_services(service_dict):
 
     return live_services
 
+def create_service(service_dict: dict[int, Service]) -> Service:
+    print("Enter the following service information:")
+
+    # Get service id (make sure it is not already in use)
+    valid_id = False
+    while not valid_id:
+        new_service_id = int(input("Service id: "))
+        if service_dict.get(new_service_id) is not None:
+            print("Service id in use. Please try again.")
+        else:
+            valid_id = True
+
+    # Get name of new service
+    new_service_name = input("Name of service: ")
+    # Get port for new service
+    new_port = int(input("Port to run on: "))
+    # Inform user about what options they have for restart mode
+
+    # Get restart mode setting (make sure it is valid by using the Service class method to validate it)
+    valid_mode = False
+    while not valid_mode:
+        print("Restart mode - options include: \"always\", \"never\" or \"unless-stopped\"")
+        new_restart_mode = input("Restart mode for service: ")
+        if not Service.validate_mode(new_restart_mode):
+            print("Please enter a valid restart mode option")
+        else:
+            valid_mode = True
+
+    # Create service using entered components
+    new_service = Service(new_service_id, new_service_name, new_port, new_restart_mode)
+    # Return new service for use in main program
+    return new_service
+
 
 def display_menu():
     print("Please select one of the following options:")
@@ -51,6 +84,10 @@ if __name__ == "__main__":
                         print(f"{service.service_id}: {service.name}")
                 else:
                     print("No services are currently active.")
+            case "3":
+                added_service = create_service(services)
+                # Add service to dictionary
+                services[added_service.service_id] = added_service
             case _:
                 print("Please choose one a valid option.")
 
