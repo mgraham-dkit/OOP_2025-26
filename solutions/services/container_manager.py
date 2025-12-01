@@ -50,6 +50,7 @@ def display_menu():
     print("2) Display all active services")
     print("3) Add a service")
     print("4) Start a service")
+    print("5) Stop a service")
 
 
 if __name__ == "__main__":
@@ -99,6 +100,19 @@ if __name__ == "__main__":
                     # Start it
                     required_service.launch()
                     print(f"Service {required_service.service_id} started")
+                else:
+                    # Otherwise inform the user there was no service under that id
+                    print("No service matching supplied id")
+            case "5":
+                # Ask the user for the service to be stopped
+                service_id = int(input("Enter service id:\n"))
+                # Find it in the dictionary
+                required_service = services.get(service_id)
+                # If there was one with the supplied id
+                if required_service is not None:
+                    # stop it
+                    result = required_service.stop()
+                    print(result)
                 else:
                     # Otherwise inform the user there was no service under that id
                     print("No service matching supplied id")
