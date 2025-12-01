@@ -71,9 +71,9 @@ class Service:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}[service_id={self.service_id}, name={self.name}, _port={self._port}, _restart_mode={self._restart_mode}, _is_active={self._is_active},_last_startup={self._last_startup}]"
 
-    def __eq__(self, other: Service) -> bool:
+    def __eq__(self, other: object) -> bool | NotImplemented:
         if not isinstance(other, Service):
-            return False
+            return NotImplemented
 
         return self.service_id == other.service_id
 
@@ -84,6 +84,17 @@ class Service:
         return self.service_id != other.service_id
         # Alternative:
     #   return not self == other
+
+    def __format__(self, format_spec: str) -> str:
+        format_spec = format_spec.lower()
+        match format_spec:
+            case "short":
+                return f"Service {self.service_id} : {self.name} on {self._port}"
+            case "full":
+                return f"Service {self.service_id} : {self.name} on {self._port}\n Mode: {self._restart_mode} - Status: {self._is_active}"
+            case _:
+                print("Invalid option selected")
+                return repr(self)
 
     @staticmethod
     def validate_mode(restart_mode: str) -> bool:
