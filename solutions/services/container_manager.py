@@ -51,6 +51,7 @@ def display_menu():
     print("3) Add a service")
     print("4) Start a service")
     print("5) Stop a service")
+    print("5) Halt a service")
 
 
 if __name__ == "__main__":
