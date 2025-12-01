@@ -49,6 +49,7 @@ def display_menu():
     print("1) Display service details")
     print("2) Display all active services")
     print("3) Add a service")
+    print("4) Start a service")
 
 
 if __name__ == "__main__":
@@ -88,6 +89,18 @@ if __name__ == "__main__":
                 added_service = create_service(services)
                 # Add service to dictionary
                 services[added_service.service_id] = added_service
+            case "4":
+                # Ask the user for the service to be started
+                service_id = int(input("Enter service id:\n"))
+                # Find it in the dictionary
+                required_service = services.get(service_id)
+                # If there was one with the supplied id
+                if required_service is not None:
+                    # Start it
+                    required_service.launch()
+                else:
+                    # Otherwise inform the user there was no service under that id
+                    print("No service matching supplied id")
             case _:
                 print("Please choose one a valid option.")
 
