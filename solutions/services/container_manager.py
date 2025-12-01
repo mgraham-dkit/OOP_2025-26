@@ -98,6 +98,7 @@ if __name__ == "__main__":
                 if required_service is not None:
                     # Start it
                     required_service.launch()
+                    print(f"Service {required_service.service_id} started")
                 else:
                     # Otherwise inform the user there was no service under that id
                     print("No service matching supplied id")
