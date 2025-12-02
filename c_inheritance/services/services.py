@@ -27,6 +27,11 @@ class Service:
 
 
     def launch(self) -> None:
+        """Starts the service.
+
+        This method sets the _is_active status to True and resets _last_startup to now.
+
+        """
         self._is_active = True
         self._last_startup = datetime.now()
 
@@ -44,9 +49,18 @@ class Service:
         return "Service deactivated"
 
     def move(self, new_port: int) -> bool:
+        """Changes the port associated with this Service if it's within the valid range of ports (0-65535).
+
+        Args:
+            new_port (int): The port to move this Service to (must be >= 0 and <= 65535)
+
+        Returns:
+            True if the port could be moved, False otherwise
+        """
         if new_port < 0 or new_port > 65535:
             return False
 
+        self._port = new_port
         return True
 
     def get_port(self) -> int:
@@ -72,6 +86,16 @@ class Service:
         return f"{self.__class__.__name__}[service_id={self.service_id}, name={self.name}, _port={self._port}, _restart_mode={self._restart_mode}, _is_active={self._is_active},_last_startup={self._last_startup}]"
 
     def __eq__(self, other: object) -> bool | NotImplemented:
+        """ Compares two Service objects (this Service and a supplied parameter)
+
+        Compares the service_id in both objects
+        Args:
+            other (object): The other Service object to check against
+
+        Returns:
+             NotImplemented if other is not a Service;
+             True if other's service_id equals this service_id; False if the service_ids differ.
+        """
         if not isinstance(other, Service):
             return NotImplemented
 

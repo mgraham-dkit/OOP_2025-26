@@ -27,6 +27,11 @@ class Service:
 
 
     def launch(self) -> None:
+        """Starts the service.
+
+        This method sets the _is_active status to True and resets _last_startup to now.
+
+        """
         self._is_active = True
         self._last_startup = datetime.now()
 
@@ -47,6 +52,7 @@ class Service:
         if new_port < 0 or new_port > 65535:
             return False
 
+        self._port = new_port
         return True
 
     def get_port(self) -> int:
