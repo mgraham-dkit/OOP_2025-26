@@ -85,6 +85,9 @@ class Service:
         # Alternative:
     #   return not self == other
 
+    def __hash__(self):
+        return hash(self.service_id)
+
     def __format__(self, format_spec: str) -> str:
         format_spec = format_spec.lower()
         match format_spec:

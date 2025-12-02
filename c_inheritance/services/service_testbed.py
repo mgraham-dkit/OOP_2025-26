@@ -11,3 +11,7 @@ rand.shuffle(service_list)
 
 for service in service_list:
     print(repr(service))
+
+
+for service in service_list:
+    print(hash(service))
