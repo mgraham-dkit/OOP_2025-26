@@ -64,7 +64,7 @@ class Service:
     def get_status(self) -> bool:
         return self._is_active
 
-    def get_startup_time(self) -> datetime:
+    def get_startup_time(self) -> datetime | None:
         return self._last_startup
 
     def __str__(self) -> str:

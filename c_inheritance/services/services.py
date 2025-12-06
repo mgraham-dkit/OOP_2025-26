@@ -1,5 +1,7 @@
 from __future__ import annotations
 from _datetime import datetime
+from types import NotImplementedType
+
 
 class Service:
     _RESTART_OPTIONS = ["never", "always", "unless-stopped"]
@@ -72,7 +74,7 @@ class Service:
     def get_status(self) -> bool:
         return self._is_active
 
-    def get_startup_time(self) -> datetime:
+    def get_startup_time(self) -> datetime | None:
         return self._last_startup
 
     def __str__(self) -> str:
@@ -85,7 +87,7 @@ class Service:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}[service_id={self.service_id}, name={self.name}, _port={self._port}, _restart_mode={self._restart_mode}, _is_active={self._is_active},_last_startup={self._last_startup}]"
 
-    def __eq__(self, other: object) -> bool | NotImplemented:
+    def __eq__(self, other: object) -> bool | NotImplementedType:
         """ Compares two Service objects (this Service and a supplied parameter)
 
         Compares the service_id in both objects
@@ -101,7 +103,7 @@ class Service:
 
         return self.service_id == other.service_id
 
-    def __ne__(self, other: Service) -> bool:
+    def __ne__(self, other: Service) -> bool | NotImplementedType:
         if not isinstance(other, Service):
             return True
 
