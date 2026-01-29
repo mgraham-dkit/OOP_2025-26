@@ -39,16 +39,19 @@ class Customer:
         if len(password) < 8:
             return False
 
+        # Check each character in password for uppercase status - true if there is any appearance of uppercase
         upper_check = any((c.isupper() for c in password))
         if not upper_check:
             print("No uppercase letter included")
             return False
 
+        # Check each character in password for lowercase status - true if there is any appearance of lowercase
         lower_check = any((c.islower() for c in password))
         if not lower_check:
             print("No lowercase letter included")
             return False
 
+        # Check each character in password for digit status - true if there is any digit appears
         digit_check = any((c.isdigit() for c in password))
         if not digit_check:
             print("No digit included")
@@ -66,6 +69,35 @@ class Customer:
 
         return True
 
+    # Text representation
+    def __str__(self) -> str:
+        return f"Username: {self._username} - {self._email}"
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}[_username={self._username}, __password=\"********\", _email={self._email}]"
+
 
 if __name__ == "__main__":
+    print("Creating cust 1 (bad password)")
     cust1 = Customer("michelle", "password", "michelle@password")
+    print(f"cust1: {cust1}")
+    print(f"repr for cust1: {repr(cust1)}")
+    print("")
+
+    print("Creating cust2 (bad email)")
+    cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
+    print(f"cust2: {cust2}")
+    print(f"repr for cust2: {repr(cust2)}")
+    print("")
+
+    print("Creating cust3 (bad username)")
+    cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
+    print(f"cust3: {cust3}")
+    print(f"repr for cust3: {repr(cust3)}")
+    print("")
+
+    print("Creating cust4 (All good!)")
+    cust4 = Customer("valid_username", "Valid passw0rd", "valid_email@emaildomain.com")
+    print(f"cust4: {cust4}")
+    print(f"repr for cust4: {repr(cust4)}")
+    print("")
