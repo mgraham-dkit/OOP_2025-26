@@ -1,3 +1,6 @@
+from types import NotImplementedType
+
+
 class Customer:
     def __init__(self, username: str, password: str, email:str):
         if not Customer.validate_username(username):
@@ -76,6 +79,22 @@ class Customer:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}[_username={self._username}, __password=\"********\", _email={self._email}]"
 
+    # Equality comparison
+    def __eq__(self, other: object) -> bool | NotImplementedType:
+        # Confirm other is the right type, return NotImplemented if not
+        # If we don't know how to compare to other's type, let other try
+        if not isinstance(other, Customer):
+            return NotImplemented
+
+        # username is identifying attribute
+        return self._username == other._username
+
+    def __ne__(self, other: object) -> bool | NotImplementedType:
+        if not isinstance(other, Customer):
+            return NotImplemented
+
+        # Use eq logic to check for equality; flip result to get not equal
+        return not self == other
 
 if __name__ == "__main__":
     print("Creating cust 1 (bad password)")
@@ -101,3 +120,22 @@ if __name__ == "__main__":
     print(f"cust4: {cust4}")
     print(f"repr for cust4: {repr(cust4)}")
     print("")
+
+    print("Creating cust5 (Values are valid, same username as cust1)")
+    cust5 = Customer("michelle", "Valid passw0rd", "valid_email@emaildomain.com")
+    print(f"cust5: {cust5}")
+    print(f"repr for cust5: {repr(cust5)}")
+    print("")
+
+
+    if cust1 != cust2:
+        print(f"cust1 and cust2 have different usernames (cust1: {cust1.username()}, cust2: {cust2.username()}), "
+              f"therefore can't be the same user")
+    else:
+        print("cust1 and cust2 have the same username - this shouldn't have happened!")
+
+    if cust1 == cust5:
+        print(f"cust1 and cust5 have the same username (cust1: {cust1.username()}, cust5: {cust5.username()}), "
+              f"therefore are considered the same entity")
+    else:
+        print("cust1 and cust5 have different usernames - this shouldn't have happened!")
