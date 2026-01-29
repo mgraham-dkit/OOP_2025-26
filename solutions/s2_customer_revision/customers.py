@@ -82,7 +82,7 @@ class Customer:
     # Equality comparison
     def __eq__(self, other: object) -> bool | NotImplementedType:
         # Confirm other is the right type, return NotImplemented if not
-        # If we don't know how to compare to other's type, let other try
+        # If we don't know how to compare to other's type, let other object try
         if not isinstance(other, Customer):
             return NotImplemented
 
@@ -96,6 +96,7 @@ class Customer:
         # Use eq logic to check for equality; flip result to get not equal
         return not self == other
 
+# Basic test script to run methods as they are developed
 if __name__ == "__main__":
     print("Creating cust 1 (bad password)")
     cust1 = Customer("michelle", "password", "michelle@password")
