@@ -96,36 +96,44 @@ class Customer:
         # Use eq logic to check for equality; flip result to get not equal
         return not self == other
 
+    def __hash__(self) -> int:
+        return hash(self._username)
+
 # Basic test script to run methods as they are developed
 if __name__ == "__main__":
     print("Creating cust 1 (bad password)")
     cust1 = Customer("michelle", "password", "michelle@password")
     print(f"cust1: {cust1}")
     print(f"repr for cust1: {repr(cust1)}")
+    print(f"hash for cust1: {hash(cust1)}")
     print("")
 
     print("Creating cust2 (bad email)")
     cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
     print(f"cust2: {cust2}")
     print(f"repr for cust2: {repr(cust2)}")
+    print(f"hash for cust2: {hash(cust2)}")
     print("")
 
     print("Creating cust3 (bad username)")
     cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
     print(f"cust3: {cust3}")
     print(f"repr for cust3: {repr(cust3)}")
+    print(f"hash for cust3: {hash(cust3)}")
     print("")
 
     print("Creating cust4 (All good!)")
     cust4 = Customer("valid_username", "Valid passw0rd", "valid_email@emaildomain.com")
     print(f"cust4: {cust4}")
     print(f"repr for cust4: {repr(cust4)}")
+    print(f"hash for cust4: {hash(cust4)}")
     print("")
 
     print("Creating cust5 (Values are valid, same username as cust1)")
     cust5 = Customer("michelle", "Valid passw0rd", "valid_email@emaildomain.com")
     print(f"cust5: {cust5}")
     print(f"repr for cust5: {repr(cust5)}")
+    print(f"hash for cust5: {hash(cust5)}")
     print("")
 
 
