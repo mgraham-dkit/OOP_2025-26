@@ -42,6 +42,12 @@ class Customer:
         if len(password) < 8:
             return False
 
+        # Equivalent to below list comprehension (line 52)!
+        # upper_check = False
+        # for c in password:
+        #     if c.isupper():
+        #         upper_check = True
+
         # Check each character in password for uppercase status - true if there is any appearance of uppercase
         upper_check = any((c.isupper() for c in password))
         if not upper_check:
