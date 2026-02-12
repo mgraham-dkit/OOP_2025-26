@@ -105,6 +105,12 @@ class Customer:
     def __hash__(self) -> int:
         return hash(self._username)
 
+    def __lt__(self, other: object) -> bool | NotImplementedType:
+        if not isinstance(other, Customer):
+            return NotImplemented
+
+        return self._username < other._username
+
 # Basic test script to run methods as they are developed
 if __name__ == "__main__":
     print("Creating cust 1 (bad password)")
@@ -154,3 +160,21 @@ if __name__ == "__main__":
               f"therefore are considered the same entity")
     else:
         print("cust1 and cust5 have different usernames - this shouldn't have happened!")
+
+    # Check where customer is not less than
+    if cust1 < cust2:
+        print(f"{cust1.username()} is less than {cust2.username()}")
+    else:
+        print(f"{cust1.username()} is not less than {cust2.username()}")
+
+    # Check where customer is less than
+    if cust1 < cust4:
+        print(f"{cust1.username()} is less than {cust4.username()}")
+    else:
+        print(f"{cust1.username()} is not less than {cust2.username()}")
+
+    # Check where customer is not less than because they are equal
+    if cust1 < cust5:
+        print(f"{cust1.username()} is less than {cust5.username()}")
+    else:
+        print(f"{cust1.username()} is not less than {cust5.username()}")
