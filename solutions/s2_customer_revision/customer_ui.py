@@ -27,6 +27,14 @@ def handle_email_entry() -> str:
     return email
 
 
+def display_password_requirements():
+    print("Password must: ")
+    print("\tBe at least 8 characters long")
+    print("\tContain at least 1 uppercase")
+    print("\tContain at least 1 lowercase")
+    print("\tContain at least 1 digit")
+
+
 def handle_password_entry() -> str:
     matching = False
     while not matching:
@@ -69,14 +77,6 @@ def login_customer(customers_dict: dict[str, Customer]) -> str | None:
 
     print("Login failed - no such username/password")
     return None
-
-
-def display_password_requirements():
-    print("Password must: ")
-    print("\tBe at least 8 characters long")
-    print("\tContain at least 1 uppercase")
-    print("\tContain at least 1 lowercase")
-    print("\tContain at least 1 digit")
 
 
 def populate_customer_dataset(customers_dict: dict[str, Customer]) -> None:
