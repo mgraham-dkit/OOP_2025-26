@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+from types import NotImplementedType
+
+
 class Product:
     # As Product has a specific prefix attached to every ID, we need to encode that here
     __ID_PREFIX = "PROD_"
@@ -42,12 +47,30 @@ class Product:
             self._units_in_stock = Product.__DEFAULT_UNITS_IN_STOCK
 
     # Getter methods
+    def get_prod_id(self) -> str:
+        """ Returns the current Product's product ID information.
+
+        Returns:
+            Returns the current Product's product ID information (as it is stored)
+        """
+        return self._prod_id
+
     @staticmethod
-    def get_default_id():
+    def get_default_id() -> str:
+        """ Returns the default ID value employed where a supplied ID is found to be invalid
+
+        Returns:
+            The default value used for IDs.
+        """
         return Product.__DEFAULT_ID_VALUE
 
     @staticmethod
-    def get_prefix():
+    def get_prefix() -> str:
+        """ Returns the standard product ID prefix
+
+        Returns:
+            The required prefix to be present at the start of all product ID values
+        """
         return Product.__ID_PREFIX
 
     # Validators
@@ -165,6 +188,46 @@ class Product:
             case _:
                 return str(self)
 
+    def __eq__(self, other: Product) -> bool | NotImplementedType:
+        """Check if this Product is equal to supplied Product based on _prod_id (case-insensitive).
+        (Product ID is the identifying attribute of a Product object)
+
+        Args:
+            other: The Product to compare this Product to
+
+        Returns:
+            True if the _prod_id values are equal, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return self._prod_id.upper() == other._prod_id.upper()
+
+    def __ne__(self, other: Product) -> bool | NotImplementedType:
+        """Check if this Product to not equal to supplied Product.
+        This uses the eq method as the basis of the comparison logic.
+
+        Args:
+            other: The Product to compare this Product to
+
+        Returns:
+            True if the Products are not equal, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return not self == other
+
+    def __hash__(self) -> int:
+        """Generate a hash identity for the current Product.
+        Hash is based on _prod_id in uppercase (in line with equality logic)
+
+        Returns:
+            An integer representing this Product based on its product ID information
+        """
+        return hash(self._prod_id.upper())
 
 class Order:
     # Order number
@@ -175,6 +238,8 @@ class Order:
     pass
 
 if __name__ == "__main__":
+    print("Check creation logic")
+    print("-" * 30)
     print("Creating valid product (no error messages should be displayed)")
     valid_prod = Product(f"{Product.get_prefix()}001", "Apples", 0.59, 300)
     print("-" * 30)
@@ -218,6 +283,7 @@ if __name__ == "__main__":
                 bad_price_none_price, bad_quantity_none_value, bad_quantity_negative_value, valid_quantity_zero]
 
     # Test text representations
+    print("Check text representation logic")
     # str
     print("%" * 30)
     print("Display products using str:")
@@ -267,4 +333,29 @@ if __name__ == "__main__":
     print("Display products using format (using full format but with different case):")
     for product in products:
         print(format(product, "FULL"))
+    print("-" * 30)
+
+    # Testing equality and identity logic
+    print("Check equality and identity logic")
+    # Check ==
+    print("=" * 30)
+    print("Check for equality (all products are compared to valid_prod object):")
+    for product in products:
+        equality_check = "is equal to" if valid_prod == product else "is not equal to"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {equality_check} {product.get_prod_id()} ({product.name})")
+    print("-" * 30)
+
+    # Check !=
+    print("=" * 30)
+    print("Check for inequality (all products are compared to valid_prod object):")
+    for product in products:
+        equality_check = "is not equal to" if valid_prod != product else "is equal to"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {equality_check} {product.get_prod_id()} ({product.name})")
+    print("-" * 30)
+
+    # Check hash
+    print("=" * 30)
+    print("Check for hash (identity generation):")
+    for product in products:
+        print(f"{product.get_prod_id()} hash = {hash(product)}")
     print("-" * 30)
