@@ -39,7 +39,6 @@ class Product:
         if Product.validate_units(units_in_stock):
             self._units_in_stock = units_in_stock
         else:
-            print("Invalid unit quantity supplied - quantity must be greater than or equal to 0")
             self._units_in_stock = Product.__DEFAULT_UNITS_IN_STOCK
 
     # Getter methods
@@ -102,7 +101,26 @@ class Product:
 
     @staticmethod
     def validate_units(units: float) -> bool:
-        pass
+        """ Validates a unit quantity to confirm it exists and is greater than or equal to 0.
+
+        Args:
+            units: The quantity of units to be validated
+
+        Returns:
+            True if the quantity of units exists and is greater than or equal to 0; False otherwise.
+        """
+        # Check for real data - does price exist
+        if units is None:
+            print("Unit quantity cannot be None")
+            return False
+
+        # Check for good data - is units suitable based on our requirements (must be >= 0)
+        if units < 0:
+            print("Invalid unit quantity supplied - unit quantity must be greater than or equal to 0")
+            return False
+
+        # Passes all requirements, return True
+        return True
 
 
 class Order:
@@ -143,4 +161,12 @@ if __name__ == "__main__":
     # Test quantity validation
     print("Creating product with negative quantity (Negative quantity error should be displayed)")
     bad_quantity_negative_value = Product(f"{Product.get_prefix()}007", "Bananas", 0.79, -30)
+    print("-" * 30)
+
+    print("Creating product with None for quantity (None unit quantity error should be displayed)")
+    bad_quantity_none_value = Product(f"{Product.get_prefix()}008", "Dragon fruit", 0.79, None)
+    print("-" * 30)
+
+    print("Creating product with quantity set to 0 (No error should be displayed)")
+    valid_quantity_zero = Product(f"{Product.get_prefix()}009", "Strawberries", 2.89, 0)
     print("-" * 30)
