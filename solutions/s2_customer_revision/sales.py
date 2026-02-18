@@ -188,6 +188,7 @@ class Product:
             case _:
                 return str(self)
 
+    # Equality and identity logic
     def __eq__(self, other: Product) -> bool | NotImplementedType:
         """Check if this Product is equal to supplied Product based on _prod_id (case-insensitive).
         (Product ID is the identifying attribute of a Product object)
@@ -228,6 +229,68 @@ class Product:
             An integer representing this Product based on its product ID information
         """
         return hash(self._prod_id.upper())
+
+    # Rich comparison logic
+    def __lt__(self, other: Product) -> bool | NotImplementedType:
+        """ Checks if the current product is less than other Product based on product ID (case-insensitive).
+
+        Args:
+            other: The Product to compare/rank against
+
+        Returns:
+            True if the current Product's _prod_id is less than the other Product's _prod_id, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return self._prod_id.upper() < other._prod_id.upper()
+
+    def __le__(self, other: Product) -> bool | NotImplementedType:
+        """ Checks if the current product is less than or equal to other Product based on product ID (case-insensitive).
+
+        Args:
+            other: The Product to compare/rank against
+
+        Returns:
+            True if the current Product's _prod_id is less than or equal to the other Product's _prod_id, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return self._prod_id.upper() <= other._prod_id.upper()
+
+    def __gt__(self, other: Product) -> bool | NotImplementedType:
+        """ Checks if the current product is greater than other Product based on product ID (case-insensitive).
+
+        Args:
+            other: The Product to compare/rank against
+
+        Returns:
+            True if the current Product's _prod_id is greater than the other Product's _prod_id, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return self._prod_id.upper() > other._prod_id.upper()
+
+    def __ge__(self, other: Product) -> bool | NotImplementedType:
+        """ Checks if the current product is greater than or equal to other Product based on product ID (case-insensitive).
+
+        Args:
+            other: The Product to compare/rank against
+
+        Returns:
+            True if the current Product's _prod_id is greater than or equal to the other Product's _prod_id, False otherwise.
+            If the parameter is not a Product, returns NotImplemented.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
+
+        return self._prod_id.upper() >= other._prod_id.upper()
+
 
 class Order:
     # Order number
@@ -358,4 +421,38 @@ if __name__ == "__main__":
     print("Check for hash (identity generation):")
     for product in products:
         print(f"{product.get_prod_id()} hash = {hash(product)}")
+    print("-" * 30)
+
+    # Testing rich comparison logic
+    print("Check rich comparison logic")
+    # Check <
+    print("$" * 30)
+    print("Check for less than (all products are compared to valid_prod object):")
+    for product in products:
+        ranking_check = "is less than" if valid_prod < product else "is greater than or equal to"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
+    print("-" * 30)
+
+    # Check <=
+    print("$" * 30)
+    print("Check for less than or equal to (all products are compared to valid_prod object):")
+    for product in products:
+        ranking_check = "is less than or equal to" if valid_prod <= product else "is greater than"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
+    print("-" * 30)
+
+    # Check >
+    print("$" * 30)
+    print("Check for greater than (all products are compared to valid_prod object):")
+    for product in products:
+        ranking_check = "is greater than" if valid_prod > product else "is less than or equal to"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
+    print("-" * 30)
+
+    # Check >=
+    print("$" * 30)
+    print("Check for greater than or equal to (all products are compared to valid_prod object):")
+    for product in products:
+        ranking_check = "is greater than or equal to" if valid_prod >= product else "is less than"
+        print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
     print("-" * 30)
