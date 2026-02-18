@@ -1,16 +1,29 @@
 from customers import Customer
+from solutions.s2_customer_revision.customers import Customer
 
 
 def create_customer(customers: dict[str, Customer]) -> Customer:
     print("Creating new customer: ")
-    available = False
-    while not available:
-        new_username = input("Username: ")
-        if new_username.lower() in customers:
-            print(f"Username \"{new_username}\" taken, please enter new username")
-        else:
-            available = True
+    new_username = handle_username_entry(customers)
+    password = handle_password_entry()
+    email = handle_email_entry()
 
+    new_customer = Customer(new_username.lower(), password, email.lower())
+    return new_customer
+
+
+def handle_email_entry() -> str:
+    valid_email = False
+    while not valid_email:
+        email = input("Email: ")
+        if not Customer.validate_email(email):
+            print("Invalid email address. Try again.")
+        else:
+            valid_email = True
+    return email
+
+
+def handle_password_entry() -> str:
     matching = False
     while not matching:
         valid = False
@@ -27,18 +40,18 @@ def create_customer(customers: dict[str, Customer]) -> Customer:
             print("Passwords do not match. Please try again.")
         else:
             matching = True
+    return password
 
 
-    valid_email = False
-    while not valid_email:
-        email = input("Email: ")
-        if not Customer.validate_email(email):
-            print("Invalid email address. Try again.")
+def handle_username_entry(customers: dict[str, Customer]) -> str:
+    available = False
+    while not available:
+        new_username = input("Username: ")
+        if new_username.lower() in customers:
+            print(f"Username \"{new_username}\" taken, please enter new username")
         else:
-            valid_email = True
-
-    new_customer = Customer(new_username.lower(), password, email.lower())
-    return new_customer
+            available = True
+    return new_username
 
 
 def display_password_requirements():
