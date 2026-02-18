@@ -1,14 +1,19 @@
 from customers import Customer
 
 
-def create_customer(customers_dict: dict[str, Customer]) -> Customer:
+def create_customer(customers_dict: dict[str, Customer]) -> str | None:
     print("Creating new customer: ")
     new_username = handle_username_entry(customers_dict)
     password = handle_password_entry()
     email = handle_email_entry()
 
     new_customer = Customer(new_username.lower(), password, email.lower())
-    return new_customer
+    if new_customer.username() not in customers_dict:
+        print("Username not available. Please try again.")
+        return None
+    else:
+        customers_dict[new_customer.username()] = new_customer
+        return new_customer.username()
 
 
 def handle_email_entry() -> str:
@@ -92,5 +97,26 @@ print("Final Customer dataset:")
 for i, username in enumerate(customers, start=1):
     print(f"{i}) {username}")
 
-new_cust = create_customer(customers)
-print(new_cust)
+
+logged_in_user = None
+exit_request = False
+while not exit_request:
+    print("Please choose from the following options:")
+    print("1) Register a new customer")
+    print("2) Login")
+    print("Exit to exit the system")
+
+    choice = input("Enter choice: ")
+    match(choice.lower()):
+        case "1":
+            logged_in_user = create_customer(customers)
+        case "2":
+            pass
+        case "exit":
+            exit_request = True
+            continue
+        case _:
+            print("Please choose one of the specified options")
+
+    if logged_in_user:
+        print("You are now logged in!")
