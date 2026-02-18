@@ -58,6 +58,19 @@ def handle_username_entry(customers_dict: dict[str, Customer]) -> str:
     return new_username
 
 
+def login_customer(customers_dict: dict[str, Customer]) -> str | None:
+    username_attempt = input("Enter username: ").lower()
+    password = input("Enter password: ")
+
+    if username_attempt in customers_dict:
+        user = customers_dict[username_attempt]
+        if user.check_password(password):
+            return username_attempt
+
+    print("Login failed - no such username/password")
+    return None
+
+
 def display_password_requirements():
     print("Password must: ")
     print("\tBe at least 8 characters long")
@@ -111,6 +124,7 @@ while not exit_request:
         case "1":
             logged_in_user = create_customer(customers)
         case "2":
+            logged_in_user = login_customer(customers)
             pass
         case "exit":
             exit_request = True

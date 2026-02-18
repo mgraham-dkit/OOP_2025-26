@@ -25,6 +25,9 @@ class Customer:
     def email(self) -> str:
         return self._email
 
+    def check_password(self, other_pass: str) -> bool:
+        return other_pass == self.__password
+
     # Validator methods
     @staticmethod
     def validate_username(username: str) -> bool:
