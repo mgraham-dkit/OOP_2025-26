@@ -1,6 +1,8 @@
+from functools import total_ordering
 from types import NotImplementedType
 
 
+@total_ordering
 class Customer:
     def __init__(self, username: str, password: str, email:str):
         if not Customer.validate_username(username):
@@ -110,6 +112,7 @@ class Customer:
             return NotImplemented
 
         return self._username < other._username
+
 
 # Basic test script to run methods as they are developed
 if __name__ == "__main__":
