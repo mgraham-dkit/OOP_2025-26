@@ -33,7 +33,6 @@ class Product:
         if Product.validate_price(unit_price):
             self._unit_price = unit_price
         else:
-            print("Invalid unit price supplied - price must be greater than 0")
             self._unit_price = Product.__DEFAULT_UNIT_PRICE
 
         # Number of units in stock cannot be below 0 - need to validate before storing
@@ -70,7 +69,7 @@ class Product:
             print("Product ID cannot be None")
             return False
 
-        # Check for good data - is product id suitable based on our requirements (case-insensitive)
+        # Check for good data - is product id suitable based on our requirements (starts with specified prefix - case-insensitive)
         if not prod_id.upper().startswith(Product.__ID_PREFIX):
             print(f"Invalid product ID supplied - ID must begin with {Product.__ID_PREFIX}")
             return False
@@ -80,7 +79,26 @@ class Product:
 
     @staticmethod
     def validate_price(price: float) -> bool:
-        pass
+        """ Validates a unit price to confirm it exists and is greater than 0.
+
+        Args:
+            price: The unit price to be validated
+
+        Returns:
+            True if the unit price exists and is greater than 0; False otherwise.
+        """
+        # Check for real data - does price exist
+        if price is None:
+            print("Price cannot be None")
+            return False
+
+        # Check for good data - is price suitable based on our requirements (must be > 0)
+        if price <= 0:
+            print("Invalid unit price supplied - price must be greater than 0")
+            return False
+
+        # Passes all requirements, return True
+        return True
 
     @staticmethod
     def validate_units(units: float) -> bool:
@@ -118,7 +136,11 @@ if __name__ == "__main__":
     bad_price_zero_price = Product(f"{Product.get_prefix()}005", "Plums", 0, 20)
     print("-" * 30)
 
+    print("Creating product with None for price (None unit price error should be displayed)")
+    bad_price_none_price = Product(f"{Product.get_prefix()}006", "Pineapples", None, 40)
+    print("-" * 30)
+
     # Test quantity validation
     print("Creating product with negative quantity (Negative quantity error should be displayed)")
-    bad_quantity_negative_value = Product(f"{Product.get_prefix()}006", "Bananas", 0.79, -30)
+    bad_quantity_negative_value = Product(f"{Product.get_prefix()}007", "Bananas", 0.79, -30)
     print("-" * 30)
