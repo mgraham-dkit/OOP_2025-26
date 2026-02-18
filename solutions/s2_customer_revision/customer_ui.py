@@ -1,10 +1,9 @@
 from customers import Customer
-from solutions.s2_customer_revision.customers import Customer
 
 
-def create_customer(customers: dict[str, Customer]) -> Customer:
+def create_customer(customers_dict: dict[str, Customer]) -> Customer:
     print("Creating new customer: ")
-    new_username = handle_username_entry(customers)
+    new_username = handle_username_entry(customers_dict)
     password = handle_password_entry()
     email = handle_email_entry()
 
@@ -43,11 +42,11 @@ def handle_password_entry() -> str:
     return password
 
 
-def handle_username_entry(customers: dict[str, Customer]) -> str:
+def handle_username_entry(customers_dict: dict[str, Customer]) -> str:
     available = False
     while not available:
         new_username = input("Username: ")
-        if new_username.lower() in customers:
+        if new_username.lower() in customers_dict:
             print(f"Username \"{new_username}\" taken, please enter new username")
         else:
             available = True
@@ -62,29 +61,31 @@ def display_password_requirements():
     print("\tContain at least 1 digit")
 
 
-# Create set of customers to work with
-cust1 = Customer("michelle", "password", "michelle@password")
-cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
-cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
-cust4 = Customer("valid_username", "Valid passw0rd", "valid_email@emaildomain.com")
-cust5 = Customer("michelle", "Valid passw0rd", "valid_email@emaildomain.com")
-cust_list = [cust1, cust2, cust3, cust4, cust5]
+def populate_customer_dataset(customers_dict: dict[str, Customer]) -> None:
+    # Create set of customers to work with
+    cust1 = Customer("michelle", "password", "michelle@password")
+    cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
+    cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
+    cust4 = Customer("valid_username", "Valid passw0rd", "valid_email@emaildomain.com")
+    cust5 = Customer("michelle", "Valid passw0rd", "valid_email@emaildomain.com")
+    cust_list = [cust1, cust2, cust3, cust4, cust5]
+    # Populate dictionary - do not add customers with duplicate usernames
+    print()
+    print("Now populating customer dataset")
+    print("-" * 20)
+    for cust in cust_list:
+        if cust.username() not in customers_dict:
+            customers_dict[cust.username()] = cust
+        else:
+            print(f"{cust.username()} cannot be added to the system as the username already exists")
+            print(f"\tExisting user details: {customers_dict[cust.username()]}")
+            print(f"\tThis user's details: {cust}")
+    print("-" * 20)
+
 
 # Create dictionary for overall storage
 customers = {}
-
-# Populate dictionary - do not add customers with duplicate usernames
-print()
-print("Now populating customer dataset")
-print("-" * 20)
-for cust in cust_list:
-    if cust.username() not in customers:
-        customers[cust.username()] = cust
-    else:
-        print(f"{cust.username()} cannot be added to the system as the username already exists")
-        print(f"\tExisting user details: {customers[cust.username()]}")
-        print(f"\tThis user's details: {cust}")
-print("-" * 20)
+populate_customer_dataset(customers)
 
 print()
 print("Final Customer dataset:")
