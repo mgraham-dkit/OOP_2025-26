@@ -122,6 +122,49 @@ class Product:
         # Passes all requirements, return True
         return True
 
+    # Text representation
+    def __str__(self) -> str:
+        """Return a user-suitable text representation of the current Product
+
+        Returns:
+            A text representation of the current Product object
+        """
+        return f"{self._prod_id} ({self.name} : €{self._unit_price} per unit ({self._units_in_stock} units in stock))"
+
+    def __repr__(self) -> str:
+        """Return a developer-focused text representation of the current Product
+
+        Returns:
+            A text representation of the current Product object
+        """
+        return f"{self.__class__.__name__}{{_prod_id={self._prod_id}, name={self.name}, _unit_price={self._unit_price}, _units_in_stock={self._units_in_stock}}}"
+
+    def __format__(self, format_spec: str) -> str:
+        """Return an appropriately-formatted text representation of the current Product
+        Short format includes product ID and name
+        Value format includes product ID and value of current stock
+        Full format includes all information (including value of current stock)
+
+        Args:
+            format_spec: The format to be applied (options are: "short", "value" or "full")
+
+        Returns:
+            A text representation structured using the specified format.
+            If an unrecognised format is supplied, the method defaults to str format.
+        """
+        if not format_spec:
+            return str(self)
+
+        match(format_spec.lower()):
+            case "short":
+                return f"{self._prod_id} - {self.name}"
+            case "value":
+                return f"{self._prod_id} current worth: €{self._units_in_stock * self._unit_price}"
+            case "full":
+                return f"{self._prod_id} ({self.name}): {self._units_in_stock} units available at €{self._unit_price} per unit. Current worth: €{self._units_in_stock * self._unit_price}"
+            case _:
+                return str(self)
+
 
 class Order:
     # Order number
@@ -169,4 +212,59 @@ if __name__ == "__main__":
 
     print("Creating product with quantity set to 0 (No error should be displayed)")
     valid_quantity_zero = Product(f"{Product.get_prefix()}009", "Strawberries", 2.89, 0)
+    print("-" * 30)
+
+    products = [valid_prod, bad_ID_none, bad_ID_no_prefix, bad_price_negative_value, bad_price_zero_price,
+                bad_price_none_price, bad_quantity_none_value, bad_quantity_negative_value, valid_quantity_zero]
+
+    # Test text representations
+    # str
+    print("%" * 30)
+    print("Display products using str:")
+    for product in products:
+        print(product)
+    print("-" * 30)
+
+    # repr
+    print("%" * 30)
+    print("Display products using repr:")
+    for product in products:
+        print(repr(product))
+    print("-" * 30)
+
+    # format
+    print("%" * 30)
+    print("Display products using format (using short format):")
+    for product in products:
+        print(format(product, "short"))
+    print("-" * 30)
+
+    print("%" * 30)
+    print("Display products using format (using value format):")
+    for product in products:
+        print(format(product, "value"))
+    print("-" * 30)
+
+    print("%" * 30)
+    print("Display products using format (using full format):")
+    for product in products:
+        print(format(product, "full"))
+    print("-" * 30)
+
+    print("%" * 30)
+    print("Display products using format (using unrecognised format):")
+    for product in products:
+        print(format(product, "asdas"))
+    print("-" * 30)
+
+    print("%" * 30)
+    print("Display products using format (using blank format):")
+    for product in products:
+        print(format(product, ""))
+    print("-" * 30)
+
+    print("%" * 30)
+    print("Display products using format (using full format but with different case):")
+    for product in products:
+        print(format(product, "FULL"))
     print("-" * 30)
