@@ -6,7 +6,8 @@ from types import NotImplementedType
 class Customer:
     def __init__(self, username: str, password: str, email:str):
         if not Customer.validate_username(username):
-            print("Supplied username is invalid")
+            #print("Supplied username is invalid")
+            raise ValueError("Supplied username is invalid")
         self._username = username
 
         if not Customer.validate_password(password):
