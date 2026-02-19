@@ -8,7 +8,7 @@ def create_customer(customers_dict: dict[str, Customer]) -> str | None:
     email = handle_email_entry()
 
     new_customer = Customer(new_username.lower(), password, email.lower())
-    if new_customer.username() not in customers_dict:
+    if new_customer.username() in customers_dict:
         print("Username not available. Please try again.")
         return None
     else:
@@ -114,23 +114,25 @@ for i, username in enumerate(customers, start=1):
 logged_in_user = None
 exit_request = False
 while not exit_request:
-    print("Please choose from the following options:")
-    print("1) Register a new customer")
-    print("2) Login")
-    print("Exit to exit the system")
+    if not logged_in_user:
+        print("Please choose from the following options:")
+        print("1) Register a new customer")
+        print("2) Login")
+        print("Exit to exit the system")
 
-    choice = input("Enter choice: ")
-    match(choice.lower()):
-        case "1":
-            logged_in_user = create_customer(customers)
-        case "2":
-            logged_in_user = login_customer(customers)
-            pass
-        case "exit":
-            exit_request = True
-            continue
-        case _:
-            print("Please choose one of the specified options")
+        choice = input("Enter choice: ")
+        match(choice.lower()):
+            case "1":
+                logged_in_user = create_customer(customers)
+            case "2":
+                logged_in_user = login_customer(customers)
+                pass
+            case "exit":
+                exit_request = True
+                logged_in_user = None
+                continue
+            case _:
+                print("Please choose one of the specified options")
 
     if logged_in_user:
         print("You are now logged in!")
