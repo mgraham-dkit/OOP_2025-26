@@ -7,11 +7,6 @@ class Product:
     # As Product has a specific prefix attached to every ID, we need to encode that here
     __ID_PREFIX = "PROD_"
 
-    # As there is no way to halt creation, we need default values to fall back to
-    __DEFAULT_ID_VALUE = "Default ID - CHANGE IMMEDIATELY"
-    __DEFAULT_UNIT_PRICE = 3
-    __DEFAULT_UNITS_IN_STOCK = 0
-
     def __init__(self, prod_id: str, name: str, unit_price: float, units_in_stock: int):
         """ Creates an instance of Product containing specified values.
         If values do not meet requirements, default values are inserted.
@@ -301,101 +296,130 @@ class Order:
     pass
 
 if __name__ == "__main__":
+    products = []
+
+    # Test creation
     print("Check creation logic")
-    print("-" * 30)
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating valid product (no error messages should be displayed)")
-    valid_prod = Product(f"{Product.get_prefix()}001", "Apples", 0.59, 300)
-    print("-" * 30)
+    try:
+        valid_prod = Product(f"{Product.get_prefix()}001", "Apples", 0.59, 300)
+        products.append(valid_prod)
+    except ValueError as e:
+        print(e)
 
     # Test ID validation
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with bad ID (ID error should be displayed)")
     try:
         bad_ID_no_prefix = Product("002", "Oranges", 0.89, 200)
+        products.append(bad_ID_no_prefix)
     except ValueError as e:
         print(e)
-    print("-" * 30)
 
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with None for ID (None ID error should be displayed)")
-    bad_ID_none = Product(None, "Peaches", 1.05, 150)
-    print("-" * 30)
+    try:
+        bad_ID_none = Product(None, "Peaches", 1.05, 150)
+        products.append(bad_ID_none)
+    except ValueError as e:
+        print(e)
 
     # Test unit price validation
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with negative unit price (Negative unit price error should be displayed)")
-    bad_price_negative_value = Product(f"{Product.get_prefix()}004", "Cherries", -12.50, 10)
-    print("-" * 30)
+    try:
+        bad_price_negative_value = Product(f"{Product.get_prefix()}004", "Cherries", -12.50, 10)
+        products.append(bad_price_negative_value)
+    except ValueError as e:
+        print(e)
 
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with unit price of 0 (0 unit price error should be displayed)")
-    bad_price_zero_price = Product(f"{Product.get_prefix()}005", "Plums", 0, 20)
-    print("-" * 30)
+    try:
+        bad_price_zero_price = Product(f"{Product.get_prefix()}005", "Plums", 0, 20)
+        products.append(bad_price_zero_price)
+    except ValueError as e:
+        print(e)
 
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with None for price (None unit price error should be displayed)")
-    bad_price_none_price = Product(f"{Product.get_prefix()}006", "Pineapples", None, 40)
-    print("-" * 30)
+    try:
+        bad_price_none_price = Product(f"{Product.get_prefix()}006", "Pineapples", None, 40)
+        products.append(bad_price_none_price)
+    except ValueError as e:
+        print(e)
 
     # Test quantity validation
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with negative quantity (Negative quantity error should be displayed)")
-    bad_quantity_negative_value = Product(f"{Product.get_prefix()}007", "Bananas", 0.79, -30)
-    print("-" * 30)
+    try:
+        bad_quantity_negative_value = Product(f"{Product.get_prefix()}007", "Bananas", 0.79, -30)
+        products.append(bad_quantity_negative_value)
+    except ValueError as e:
+        print(e)
 
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with None for quantity (None unit quantity error should be displayed)")
-    bad_quantity_none_value = Product(f"{Product.get_prefix()}008", "Dragon fruit", 0.79, None)
-    print("-" * 30)
+    try:
+        bad_quantity_none_value = Product(f"{Product.get_prefix()}008", "Dragon fruit", 0.79, None)
+        products.append(bad_quantity_none_value)
+    except ValueError as e:
+        print(e)
 
+    print(f"{"-" * 15}Creation logic test{"-" * 15}")
     print("Creating product with quantity set to 0 (No error should be displayed)")
-    valid_quantity_zero = Product(f"{Product.get_prefix()}009", "Strawberries", 2.89, 0)
-    print("-" * 30)
+    try:
+        valid_quantity_zero = Product(f"{Product.get_prefix()}009", "Strawberries", 2.89, 0)
+        products.append(valid_quantity_zero)
+    except ValueError as e:
+        print(e)
 
-    products = [valid_prod, bad_ID_none, bad_ID_no_prefix, bad_price_negative_value, bad_price_zero_price,
-                bad_price_none_price, bad_quantity_none_value, bad_quantity_negative_value, valid_quantity_zero]
+    print("-" * 30)
+    print(f"Number of products created cleanly: {len(products)}")
+    print("-" * 30)
 
     # Test text representations
     print("Check text representation logic")
     # str
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using str:")
     for product in products:
         print(product)
-    print("-" * 30)
 
     # repr
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using repr:")
     for product in products:
         print(repr(product))
-    print("-" * 30)
 
     # format
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using short format):")
     for product in products:
         print(format(product, "short"))
-    print("-" * 30)
 
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using value format):")
     for product in products:
         print(format(product, "value"))
-    print("-" * 30)
 
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using full format):")
     for product in products:
         print(format(product, "full"))
-    print("-" * 30)
 
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using unrecognised format):")
     for product in products:
         print(format(product, "asdas"))
-    print("-" * 30)
 
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using blank format):")
     for product in products:
         print(format(product, ""))
-    print("-" * 30)
 
-    print("%" * 30)
+    print(f"{"%" * 15}Text representation logic test{"%" * 15}")
     print("Display products using format (using full format but with different case):")
     for product in products:
         print(format(product, "FULL"))
@@ -404,23 +428,21 @@ if __name__ == "__main__":
     # Testing equality and identity logic
     print("Check equality and identity logic")
     # Check ==
-    print("=" * 30)
+    print(f"{"=" * 15}Text equality and identity test{"=" * 15}")
     print("Check for equality (all products are compared to valid_prod object):")
     for product in products:
         equality_check = "is equal to" if valid_prod == product else "is not equal to"
         print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {equality_check} {product.get_prod_id()} ({product.name})")
-    print("-" * 30)
 
     # Check !=
-    print("=" * 30)
+    print(f"{"=" * 15}Text equality and identity test{"=" * 15}")
     print("Check for inequality (all products are compared to valid_prod object):")
     for product in products:
         equality_check = "is not equal to" if valid_prod != product else "is equal to"
         print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {equality_check} {product.get_prod_id()} ({product.name})")
-    print("-" * 30)
 
     # Check hash
-    print("=" * 30)
+    print(f"{"=" * 15}Text equality and identity test{"=" * 15}")
     print("Check for hash (identity generation):")
     for product in products:
         print(f"{product.get_prod_id()} hash = {hash(product)}")
@@ -429,31 +451,28 @@ if __name__ == "__main__":
     # Testing rich comparison logic
     print("Check rich comparison logic")
     # Check <
-    print("$" * 30)
+    print(f"{"$" * 15}Rich comparison test{"$" * 15}")
     print("Check for less than (all products are compared to valid_prod object):")
     for product in products:
         ranking_check = "is less than" if valid_prod < product else "is greater than or equal to"
         print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
-    print("-" * 30)
 
     # Check <=
-    print("$" * 30)
+    print(f"{"$" * 15}Rich comparison test{"$" * 15}")
     print("Check for less than or equal to (all products are compared to valid_prod object):")
     for product in products:
         ranking_check = "is less than or equal to" if valid_prod <= product else "is greater than"
         print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
-    print("-" * 30)
 
     # Check >
-    print("$" * 30)
+    print(f"{"$" * 15}Rich comparison test{"$" * 15}")
     print("Check for greater than (all products are compared to valid_prod object):")
     for product in products:
         ranking_check = "is greater than" if valid_prod > product else "is less than or equal to"
         print(f"{valid_prod.get_prod_id()} ({valid_prod.name}) {ranking_check} {product.get_prod_id()} ({product.name})")
-    print("-" * 30)
 
     # Check >=
-    print("$" * 30)
+    print(f"{"$" * 15}Rich comparison test{"$" * 15}")
     print("Check for greater than or equal to (all products are compared to valid_prod object):")
     for product in products:
         ranking_check = "is greater than or equal to" if valid_prod >= product else "is less than"
