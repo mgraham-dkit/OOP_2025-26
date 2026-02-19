@@ -79,6 +79,13 @@ def login_customer(customers_dict: dict[str, Customer]) -> str | None:
     return None
 
 
+def handle_session(customers_dict: dict[str, Customer]) -> None:
+    print("*" * 20)
+    print("No functionality present")
+    print("Session terminating")
+    print("*" * 20)
+
+
 def populate_customer_dataset(customers_dict: dict[str, Customer]) -> None:
     # Create set of customers to work with
     cust1 = Customer("michelle", "password", "michelle@password")
@@ -136,3 +143,5 @@ while not exit_request:
 
     if logged_in_user:
         print("You are now logged in!")
+        handle_session(customers)
+        logged_in_user = None
