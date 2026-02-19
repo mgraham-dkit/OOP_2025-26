@@ -114,6 +114,10 @@ class Product:
             print("Price cannot be None")
             return False
 
+        if not isinstance(price, float) and not isinstance(price, int):
+            print("price must be a number")
+            return False
+
         # Check for good data - is price suitable based on our requirements (must be > 0)
         if price <= 0:
             print("Invalid unit price supplied - price must be greater than 0")
@@ -317,6 +321,10 @@ if __name__ == "__main__":
     print("-" * 30)
 
     # Test unit price validation
+    print("Creating product with non-numeric unit price (Wrong type unit price error should be displayed)")
+    bad_price_non_numeric_value = Product(f"{Product.get_prefix()}004", "Cherries", "12.00", 10)
+    print("-" * 30)
+
     print("Creating product with negative unit price (Negative unit price error should be displayed)")
     bad_price_negative_value = Product(f"{Product.get_prefix()}004", "Cherries", -12.50, 10)
     print("-" * 30)
