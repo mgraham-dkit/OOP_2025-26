@@ -1,23 +1,39 @@
 def multiply() -> None:
-    try:
-        num1 = float(input("Value one: "))
-        num2 = float(input("Value two: "))
+    valid = False
+    while not valid:
+        try:
+            num1 = float(input("Value one: "))
+            valid = True
+        except ValueError as e:
+            print("Invalid input for value 1 - please try again")
 
-        print(f"{num1} * {num2} = {num1*num2}")
-    except ValueError as e:
-        print("Invalid input - please try again")
+    valid = False
+    while not valid:
+        try:
+            num2 = float(input("Value two: "))
+            valid = True
+        except ValueError as e:
+            print("Invalid input for value 2 - please try again")
+
+
+    print(f"{num1} * {num2} = {num1 * num2}")
+
 
 def add(num1: int | float, num2: int | float) -> int| float:
     return num1 + num2
 
 
-keepRunning = True
-
-while keepRunning:
+def display_menu():
     print("Choose from the following: ")
     print("1) Add two numbers")
     print("2) Multiply two numbers")
     print("exit to exit the calculate")
+
+
+keepRunning = True
+
+while keepRunning:
+    display_menu()
     choice = input()
     match(choice.lower()):
         case "1":
