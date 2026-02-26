@@ -86,6 +86,24 @@ def handle_session(customers_dict: dict[str, Customer]) -> None:
     print("*" * 20)
 
 
+def create_exceptional_customer(customers_dict: dict[str, Customer]) -> Customer | None:
+    print("Creating new customer: ")
+    new_username = handle_username_entry(customers_dict)
+    password = handle_password_entry()
+    email = handle_email_entry()
+
+    try:
+        new_customer = Customer(new_username.lower(), password, email.lower())
+        if new_customer.username() in customers_dict:
+            print("Username not available. Please try again.")
+            return None
+        else:
+            return new_customer
+    except ValueError as e:
+        print(e)
+        return None
+
+
 def populate_customer_dataset(customers_dict: dict[str, Customer]) -> None:
     # Create set of customers to work with
     cust1 = Customer("michelle", "password", "michelle@password")

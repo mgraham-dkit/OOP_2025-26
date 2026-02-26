@@ -11,11 +11,11 @@ class Customer:
         self._username = username
 
         if not Customer.validate_password(password):
-            print("Password does not meet requirements")
+            raise ValueError("Password does not meet requirements - Supplied password is invalid")
         self.__password = password
 
         if not Customer.validate_email(email):
-            print("Supplied email is invalid")
+            raise ValueError("Supplied email is invalid")
         self._email = email
 
     # Getter methods so we can see the encapsulated information outside this class
@@ -121,25 +121,42 @@ class Customer:
 # Basic test script to run methods as they are developed
 if __name__ == "__main__":
     print("Creating cust 1 (bad password)")
-    cust1 = Customer("michelle", "password", "michelle@password")
-    print(f"cust1: {cust1}")
-    print(f"repr for cust1: {repr(cust1)}")
-    print(f"hash for cust1: {hash(cust1)}")
-    print("")
+    cust1Exists = False
+    try:
+        cust1 = Customer("michelle", "password", "michelle@password")
+        print(f"cust1: {cust1}")
+        print(f"repr for cust1: {repr(cust1)}")
+        print(f"hash for cust1: {hash(cust1)}")
+        print("")
+    except ValueError as e:
+        print(e)
+    else:
+        cust1Exists = True
 
     print("Creating cust2 (bad email)")
-    cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
-    print(f"cust2: {cust2}")
-    print(f"repr for cust2: {repr(cust2)}")
-    print(f"hash for cust2: {hash(cust2)}")
-    print("")
+    cust2Exists = False
+    try:
+        cust2 = Customer("hermione", "Wing4rdium", "hermione_email")
+        print(f"cust2: {cust2}")
+        print(f"repr for cust2: {repr(cust2)}")
+        print(f"hash for cust2: {hash(cust2)}")
+        print("")
+    except ValueError as e:
+        print(e)
+    else:
+        cust2Exists = True
 
     print("Creating cust3 (bad username)")
-    cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
-    print(f"cust3: {cust3}")
-    print(f"repr for cust3: {repr(cust3)}")
-    print(f"hash for cust3: {hash(cust3)}")
-    print("")
+    try:
+        cust3 = Customer("shorty", "SuperS3cur3", "short@accepted.com")
+        print(f"cust3: {cust3}")
+        print(f"repr for cust3: {repr(cust3)}")
+        print(f"hash for cust3: {hash(cust3)}")
+        print("")
+    except ValueError as e:
+        print(e)
+    else:
+        cust3Exists = True
 
     print("Creating cust4 (All good!)")
     cust4 = Customer("valid_username", "Valid passw0rd", "valid_email@emaildomain.com")
@@ -155,33 +172,38 @@ if __name__ == "__main__":
     print(f"hash for cust5: {hash(cust5)}")
     print("")
 
+    if cust1Exists and cust2Exists:
+        if cust1 != cust2:
+            print(f"cust1 and cust2 have different usernames (cust1: {cust1.username()}, cust2: {cust2.username()}), "
+                  f"therefore can't be the same user")
+        else:
+            print("cust1 and cust2 have the same username - this shouldn't have happened!")
 
-    if cust1 != cust2:
-        print(f"cust1 and cust2 have different usernames (cust1: {cust1.username()}, cust2: {cust2.username()}), "
-              f"therefore can't be the same user")
-    else:
-        print("cust1 and cust2 have the same username - this shouldn't have happened!")
-
-    if cust1 == cust5:
-        print(f"cust1 and cust5 have the same username (cust1: {cust1.username()}, cust5: {cust5.username()}), "
-              f"therefore are considered the same entity")
-    else:
-        print("cust1 and cust5 have different usernames - this shouldn't have happened!")
+    if cust1Exists:
+        if cust1 == cust5:
+            print(f"cust1 and cust5 have the same username (cust1: {cust1.username()}, cust5: {cust5.username()}), "
+                  f"therefore are considered the same entity")
+        else:
+            print("cust1 and cust5 have different usernames - this shouldn't have happened!")
 
     # Check where customer is not less than
-    if cust1 < cust2:
-        print(f"{cust1.username()} is less than {cust2.username()}")
-    else:
-        print(f"{cust1.username()} is not less than {cust2.username()}")
+    if cust1Exists and cust2Exists:
+        if cust1 < cust2:
+            print(f"{cust1.username()} is less than {cust2.username()}")
+        else:
+            print(f"{cust1.username()} is not less than {cust2.username()}")
 
     # Check where customer is less than
-    if cust1 < cust4:
-        print(f"{cust1.username()} is less than {cust4.username()}")
-    else:
-        print(f"{cust1.username()} is not less than {cust2.username()}")
+    if cust1Exists:
+        if cust1 < cust4:
+            print(f"{cust1.username()} is less than {cust4.username()}")
+        else:
+            print(f"{cust1.username()} is not less than {cust4.username()}")
+
 
     # Check where customer is not less than because they are equal
-    if cust1 < cust5:
-        print(f"{cust1.username()} is less than {cust5.username()}")
-    else:
-        print(f"{cust1.username()} is not less than {cust5.username()}")
+    if cust1Exists:
+        if cust1 < cust5:
+            print(f"{cust1.username()} is less than {cust5.username()}")
+        else:
+            print(f"{cust1.username()} is not less than {cust5.username()}")

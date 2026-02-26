@@ -19,12 +19,12 @@ class Product:
             units_in_stock: Number of units currently in stock for this product (cannot be less than 0)
         """
         # Product ID must start with specific start sequence - need to validate before storing
-        if Product.validate_id(prod_id):
-            # Convert id to uppercase
-            prod_id = prod_id.upper()
+        valid, error_msg = Product.validate_id(prod_id)
+        if valid:
+            self._prod_id = prod_id.upper()
             self._prod_id = prod_id
         else:
-            raise ValueError("ID value invalid")
+            raise ValueError(error_msg)
 
         # No logic for name structure - no need to validate
         self.name = name
@@ -70,7 +70,7 @@ class Product:
 
     # Validators
     @staticmethod
-    def validate_id(prod_id: str) -> bool:
+    def validate_id(prod_id: str) -> tuple[bool, str] | tuple[bool, None]:
         """ Validates a product ID to confirm it starts with appropriate prefix (case-insensitive).
         Prefix is specified by __ID_PREFIX.
 
@@ -83,16 +83,14 @@ class Product:
 
         # Check for real data - does product id exist
         if prod_id is None:
-            print("Product ID cannot be None")
-            return False
+            return False, "Product ID cannot be None"
 
         # Check for good data - is product id suitable based on our requirements (starts with specified prefix - case-insensitive)
         if not prod_id.upper().startswith(Product.__ID_PREFIX):
-            print(f"Invalid product ID supplied - ID must begin with {Product.__ID_PREFIX}")
-            return False
+            return False, f"Invalid product ID supplied - ID must begin with {Product.__ID_PREFIX}"
 
         # Passes all requirements, return True
-        return True
+        return True, None
 
     @staticmethod
     def validate_price(price: float) -> bool:
