@@ -48,7 +48,7 @@ class Customer:
         if len(password) < 8:
             return False
 
-        # Equivalent to below list comprehension (line 52)!
+        # Equivalent to below list comprehension (line 58)!
         # upper_check = False
         # for c in password:
         #     if c.isupper():
