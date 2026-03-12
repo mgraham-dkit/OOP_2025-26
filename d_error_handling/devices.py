@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+
+class DeviceInterfaceError(ValueError):
+    pass
+
+
 class Device:
     '''
     name
@@ -17,8 +22,18 @@ class Device:
 
 
     def add_component(self, component: Component) -> None:
+        '''Adds a valid provided component to the internal component list
+            All components must implement the Device interface
+        Args:
+            component: Component device to be added
+
+        Raises:
+            ValueError: Where component interface does not match device interface
+        '''
+        if not component.get_interface():
+            raise ValueError(f"Component {component.get_name()} has no interface specified")
         if component.get_interface() != self._interface:
-            raise ValueError(f"Component {component.get_name()} employs incorrect interface")
+            raise DeviceInterfaceError(f"Component {component.get_name()} employs incorrect interface")
 
         self.__components.append(component)
 
