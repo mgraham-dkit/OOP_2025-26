@@ -7,6 +7,8 @@ def configure_logging(logging_level: int) -> None:
     # Configure the logging set up and assign handlers
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging_level, handlers=[console_handler])
 
+configure_logging(logging.DEBUG)
+logger = logging.getLogger()
 
 def multiply() -> None:
     valid = False
@@ -43,8 +45,6 @@ def display_menu():
 
 
 if __name__ == "__main__":
-    configure_logging(logging.DEBUG)
-    logger = logging.getLogger()
     keepRunning = True
 
     while keepRunning:
