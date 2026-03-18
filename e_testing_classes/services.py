@@ -120,7 +120,7 @@ class Service:
 
         return self.service_id == other.service_id
 
-    def __ne__(self, other: Service) -> bool | NotImplementedType:
+    def __ne__(self, other: object) -> bool | NotImplementedType:
         if not isinstance(other, Service):
             return NotImplemented
 

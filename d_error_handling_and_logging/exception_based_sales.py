@@ -182,7 +182,7 @@ class Product:
                 return str(self)
 
     # Equality and identity logic
-    def __eq__(self, other: Product) -> bool | NotImplementedType:
+    def __eq__(self, other: object) -> bool | NotImplementedType:
         """Check if this Product is equal to supplied Product based on _prod_id (case-insensitive).
         (Product ID is the identifying attribute of a Product object)
 
@@ -198,7 +198,7 @@ class Product:
 
         return self._prod_id.upper() == other._prod_id.upper()
 
-    def __ne__(self, other: Product) -> bool | NotImplementedType:
+    def __ne__(self, other: object) -> bool | NotImplementedType:
         """Check if this Product to not equal to supplied Product.
         This uses the eq method as the basis of the comparison logic.
 
@@ -224,7 +224,7 @@ class Product:
         return hash(self._prod_id.upper())
 
     # Rich comparison logic
-    def __lt__(self, other: Product) -> bool | NotImplementedType:
+    def __lt__(self, other: object) -> bool | NotImplementedType:
         """ Checks if the current product is less than other Product based on product ID (case-insensitive).
 
         Args:
@@ -239,7 +239,7 @@ class Product:
 
         return self._prod_id.upper() < other._prod_id.upper()
 
-    def __le__(self, other: Product) -> bool | NotImplementedType:
+    def __le__(self, other: object) -> bool | NotImplementedType:
         """ Checks if the current product is less than or equal to other Product based on product ID (case-insensitive).
 
         Args:
@@ -254,7 +254,7 @@ class Product:
 
         return self._prod_id.upper() <= other._prod_id.upper()
 
-    def __gt__(self, other: Product) -> bool | NotImplementedType:
+    def __gt__(self, other: object) -> bool | NotImplementedType:
         """ Checks if the current product is greater than other Product based on product ID (case-insensitive).
 
         Args:
@@ -269,7 +269,7 @@ class Product:
 
         return self._prod_id.upper() > other._prod_id.upper()
 
-    def __ge__(self, other: Product) -> bool | NotImplementedType:
+    def __ge__(self, other: object) -> bool | NotImplementedType:
         """ Checks if the current product is greater than or equal to other Product based on product ID (case-insensitive).
 
         Args:

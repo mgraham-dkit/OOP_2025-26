@@ -24,13 +24,13 @@ class Student:
         # No example or information to work from, so specify the type here for clarity
         self.__grades: dict[str, int|float] = {}
 
-    def __eq__(self, other: Student) -> bool | NotImplementedType:
+    def __eq__(self, other: object) -> bool | NotImplementedType:
         if not isinstance(other, Student):
             return NotImplemented
 
         return self._student_id.upper() == other._student_id.upper()
 
-    def __ne__(self, other: Student) -> bool | NotImplementedType:
+    def __ne__(self, other: object) -> bool | NotImplementedType:
         if not isinstance(other, Student):
             return NotImplemented
 
