@@ -1,0 +1,7 @@
+{
+  "ticket_id": 1,
+  "title": "Ticket 1",
+  "description" : "Test ticket entry",
+  "status" : "OPEN",
+  "assigned_to" : "Jason"
+}
