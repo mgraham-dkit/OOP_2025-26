@@ -1,0 +1,19 @@
+[
+  {
+    "type": "Ticket",
+    "ticket_id": 3,
+    "title": "Test ticket",
+    "description": "description of ticket",
+    "status": "OPEN",
+    "assigned_to": "Anthony"
+  },
+  {
+    "type": "Ticket",
+    "ticket_id": 4,
+    "title": "Test ticket 2",
+    "description": "Tester ticket desc",
+    "status": "RESOLVED",
+    "assigned_to": "Michael"
+  }
+]
+
