@@ -1,0 +1,29 @@
+[
+  {
+      "type": "Book",
+      "title": "To Kill a Mockingbird",
+      "author": {
+            "type": "Author",
+            "first_name": "Harper",
+            "last_name": "Lee"
+      }
+  },
+  {
+    "type": "Book",
+    "title": "The Gruffalo",
+    "author": {
+          "type": "Author",
+          "first_name": "Julia",
+          "last_name": "Donaldson"
+    }
+  },
+  {
+    "type": "Book",
+    "title": "Press Start!",
+    "author": {
+          "type": "Author",
+          "first_name": "Thomas",
+          "last_name": "Flintham"
+    }
+  }
+]
