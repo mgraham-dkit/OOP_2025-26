@@ -9,7 +9,7 @@
   },
   {
     "type": "Ticket",
-    "id": 4,
+    "ticket_id": 4,
     "title": "Test ticket 2",
     "description": "Tester ticket desc",
     "status": "RESOLVED",

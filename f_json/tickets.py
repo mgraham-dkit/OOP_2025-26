@@ -11,3 +11,16 @@ class Ticket:
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}{{ticket_id={self.ticket_id}, title={self.title}, description={self.description}, status={self.status}, assigned_to={self.assigned_to}}}"
+
+    @classmethod
+    def from_dict(cls, ticket_dict_obj):
+        try:
+            ticket_id = ticket_dict_obj["ticket_id"]
+            title = ticket_dict_obj["title"]
+            desc = ticket_dict_obj["description"]
+            status = ticket_dict_obj["status"]
+            assigned = ticket_dict_obj["assigned_to"]
+            return cls(ticket_id, title, desc, status, assigned)
+        except KeyError as e:
+            print(f"KeyError occurred on {e} in {ticket_dict_obj}")
+            raise KeyError(f"JSON deserialisation error: {e}")
