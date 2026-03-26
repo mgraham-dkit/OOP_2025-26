@@ -1,0 +1,9 @@
+{
+    "type": "Book",
+    "title": "To Kill a Mockingbird",
+    "author": {
+          "type": "Author",
+          "first_name": "Harper",
+          "last_name": "Lee"
+    }
+}
