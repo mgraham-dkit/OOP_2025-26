@@ -10,15 +10,18 @@ class Book:
         return f"{self.title} by {self.author}"
 
     @classmethod
-    def from_dict(cls, book_dict):
+    def from_dict(cls, data):
         try:
-            title = book_dict["title"]
-            temp_author = book_dict["author"]
+            if data["type"] != cls.__name__:
+                raise ValueError(f"Invalid type value ({data["type"]}) within dict  - {cls.__name__} cannot deserialise")
+
+            title = data["title"]
+            temp_author = data["author"]
             author = Author.from_dict(temp_author)
             return Book(title,author)
         except KeyError as e:
-            print(f"Issue occurred when building {cls} - cannot find key {e}")
-            raise KeyError(f"JSON error occurred when building {cls} - cannot find key {e}")
+            raise KeyError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
+            #raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
 
 
 class Author:
@@ -30,12 +33,12 @@ class Author:
         return f"{self.first_name} {self.last_name}"
 
     @classmethod
-    def from_dict(cls, dict_obj):
+    def from_dict(cls, data):
         try:
-            first = dict_obj["first_name"]
-            last = dict_obj["last_name"]
+            first = data["first_name"]
+            last = data["last_name"]
             return cls(first, last)
 
         except KeyError as e:
-            print(f"Issue occurred when building Author - cannot find key {e}")
-            raise KeyError(f"JSON error occurred when building {cls} - cannot find key {e}")
+            raise KeyError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
+            #raise ValueError(f"{cls.__name__} JSON error -> Missing key: {e}")

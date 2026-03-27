@@ -23,7 +23,16 @@
     "author": {
           "type": "Author",
           "first_name": "Thomas",
-          "last_name": "Flintham"
+          "lastname": "Flintham"
+    }
+  },
+  {
+    "type": "NotBook",
+    "title": "Press Start!",
+    "author": {
+          "type": "Author",
+          "first_name": "Thomas",
+          "lastname": "Flintham"
     }
   }
 ]

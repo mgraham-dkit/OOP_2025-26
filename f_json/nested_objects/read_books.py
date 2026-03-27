@@ -7,8 +7,11 @@ def parse_json(filename: str) -> list[Book]:
 
         book_list = []
         for book_dict in list_book_dicts:
-            book = Book.from_dict(book_dict)
-            book_list.append(book)
+            try:
+                book = Book.from_dict(book_dict)
+                book_list.append(book)
+            except (KeyError, ValueError) as e:
+                print(e)
 
     return book_list
 
