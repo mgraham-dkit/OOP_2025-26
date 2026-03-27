@@ -5,4 +5,6 @@ class User:
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["name"], data["age"])
+        name = data["name"]
+        age = data["age"]
+        return cls(name, age)

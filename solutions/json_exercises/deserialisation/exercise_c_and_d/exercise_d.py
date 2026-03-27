@@ -5,6 +5,8 @@ from users import User
 with open("users.json") as file:
     users_dict_list = json.load(file)
 
+    users_list = [User.from_dict(user_dict) for user_dict in users_dict_list]
+
     users = {}
     for user_dict in users_dict_list:
         u = User.from_dict(user_dict)
