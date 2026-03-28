@@ -1,0 +1,36 @@
+Step 1:
+    Create a class Author containing:
+        first name
+        last name
+        __init__
+        __str__
+        from_dict (@classmethod)
+
+Step 2)
+    Create a JSON file containing information for 3 authors
+
+Step 3)
+    Write a program to read in a JSON array of authors. It should:
+        a) Parse the file to a list of dictionaries
+        b) Convert each dictionary to an Author
+        c) Display the list of all authors read in
+
+Step 4)
+    Write a class called Book that contains:
+        title
+        author (an Author object)
+        __init__
+        __str__
+        __from__dict (@classmethod)
+
+Step 5)
+    Create a JSON file containing information for 3 books
+    Note: Each book should contain a JSON object for an author!
+
+Step 6)
+    Write a program to read in a JSON array of books. It should:
+        a) Parse the file to a list of dictionaries
+        b) Convert each dictionary to an Book
+        c) Display the list of all books read in
+
+Solution in f_json/nested_objects !

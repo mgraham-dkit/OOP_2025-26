@@ -20,8 +20,7 @@ class Book:
             author = Author.from_dict(temp_author)
             return Book(title,author)
         except KeyError as e:
-            raise KeyError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
-            #raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
+            raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
 
 
 class Author:
@@ -40,5 +39,4 @@ class Author:
             return cls(first, last)
 
         except KeyError as e:
-            raise KeyError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
-            #raise ValueError(f"{cls.__name__} JSON error -> Missing key: {e}")
+            raise ValueError(f"{cls.__name__} JSON error -> Missing key: {e}")
