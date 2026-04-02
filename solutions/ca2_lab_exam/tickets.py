@@ -22,13 +22,13 @@ class Ticket:
     @staticmethod
     def validate_id(id_val: int) -> int:
         if not id_val:
-            raise ValueError("Id cannot be blank")
+            raise ValueError(f"Id cannot be blank")
 
         if not isinstance(id_val, int):
-            raise TicketException("Id must be an integer")
+            raise TicketException(f"Id ({id_val}) must be supplied as an integer")
 
         if id_val <= 0:
-            raise TicketException("Id number must be greater than 0")
+            raise TicketException(f"Id number ({id_val}) must be greater than 0")
 
         return id_val
 
@@ -112,7 +112,6 @@ class Ticket:
             raise TicketException(f"Supplied status ({new_status}) is not a valid status option")
 
         self.__status = new_status
-
 
 
 class FeatureRequest(Ticket):
