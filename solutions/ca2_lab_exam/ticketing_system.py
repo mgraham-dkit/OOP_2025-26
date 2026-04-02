@@ -1,6 +1,3 @@
-from typing import Any
-
-from solutions.ca2_lab_exam.tickets import FeatureRequest, Ticket
 from tickets import Ticket
 from tickets import FeatureRequest
 from tickets import TicketException
@@ -140,6 +137,7 @@ def display_tickets_for_agent(assigned_tickets: dict[str, list[Ticket]]) -> None
     agent = input("Please enter agent name: ")
     if agent.lower() not in assigned_tickets:
         print("No agent matching supplied name registered in system")
+        return
 
     agent_tickets = assigned_tickets[agent]
     for i, ticket in enumerate(agent_tickets, 1):
@@ -184,7 +182,17 @@ def display_menu() -> None:
 
 if __name__ == "__main__":
     # Read file:
-    unassigned, assigned = read_file("tickets.txt")
+    valid = False
+    filename = ""
+    while not valid:
+        try:
+            filename = input("Please enter ticket data filename: ")
+            unassigned, assigned = read_file(filename)
+            valid = True
+        except FileNotFoundError as e:
+            logger.warning(f"Cannot open file {filename}")
+            print(f"File {filename} cannot be found. Please enter a new filename.")
+
     print("Unassigned data:")
     for t in unassigned:
         print(t)
