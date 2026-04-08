@@ -1,0 +1,9 @@
+{
+    "type": "Employee",
+    "name": "P. Sherman",
+    "address": {
+        "type": "Address",
+        "street": "42 Wallaby Way",
+        "city": "Sydney"
+    }
+}

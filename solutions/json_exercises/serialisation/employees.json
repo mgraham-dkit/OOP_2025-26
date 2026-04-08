@@ -1,0 +1,29 @@
+[
+    {
+        "type": "Employee",
+        "name": "P. 0 Sherman",
+        "address": {
+            "type": "Address",
+            "street": "0 Wallaby Way",
+            "city": "Syd0ney"
+        }
+    },
+    {
+        "type": "Employee",
+        "name": "P. 1 Sherman",
+        "address": {
+            "type": "Address",
+            "street": "1 Wallaby Way",
+            "city": "Syd1ney"
+        }
+    },
+    {
+        "type": "Employee",
+        "name": "P. 2 Sherman",
+        "address": {
+            "type": "Address",
+            "street": "2 Wallaby Way",
+            "city": "Syd2ney"
+        }
+    }
+]
