@@ -1,0 +1,24 @@
+{
+  "type": "Team",
+  "name": "Compute",
+  "members": [
+    {
+      "type": "Worker",
+      "name": "Alice",
+      "age": 25,
+      "skills": [
+        "python",
+        "sql"
+      ]
+    },
+    {
+      "type": "Worker",
+      "name": "Bob",
+      "age": 23,
+      "skills": [
+        "python",
+        "css"
+      ]
+    }
+  ]
+}
