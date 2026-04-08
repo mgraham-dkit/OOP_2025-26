@@ -84,6 +84,15 @@ class Worker:
         except KeyError as e:
             raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
 
+    def to_dict(self) -> dict[str, str | int | list[str]]:
+        data = {}
+
+        data["type"] = self.__class__.__name__
+        data["name"] = self._name
+        data["age"] = self._age
+        data["skills"] = self._skills
+
+        return data
 
 
 class Team:
@@ -150,3 +159,5 @@ class Team:
             return cls(name, members)
         except KeyError as e:
             raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
+
+    def to_dict(self) -> :
