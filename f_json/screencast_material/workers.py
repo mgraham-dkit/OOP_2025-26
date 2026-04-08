@@ -160,4 +160,11 @@ class Team:
         except KeyError as e:
             raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
 
-    def to_dict(self) -> :
+    def to_dict(self) -> dict[str, str | list[dict[str, str | int | list[str]]]]:
+        data = {}
+
+        data["type"] = self.__class__.__name__
+        data["name"] = self._name
+        data["members"] = [member.to_dict() for member in self._members]
+
+        return data
