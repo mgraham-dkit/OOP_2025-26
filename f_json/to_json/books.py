@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any, Self
+
 
 class Book:
     def __init__(self, title: str, author: Author):
@@ -18,11 +20,11 @@ class Book:
             title = data["title"]
             temp_author = data["author"]
             author = Author.from_dict(temp_author)
-            return Book(title,author)
+            return cls(title,author)
         except KeyError as e:
             raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, str | Author]:
         data = {}
 
         data["type"] = self.__class__.__name__
@@ -42,7 +44,7 @@ class Author:
         return f"{self.first_name} {self.last_name}"
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict[str, Any]) -> Self:
         try:
             first = data["first_name"]
             last = data["last_name"]
@@ -51,7 +53,7 @@ class Author:
         except KeyError as e:
             raise ValueError(f"{cls.__name__} JSON error -> Missing key: {e}")
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, str]:
         data = {}
         data["type"] = self.__class__.__name__
 
