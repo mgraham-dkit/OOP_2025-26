@@ -165,6 +165,15 @@ class Team:
 
         data["type"] = self.__class__.__name__
         data["name"] = self._name
+
         data["members"] = [member.to_dict() for member in self._members]
+
+        # List comprehension on line 169 is equivalent to the following:
+        # member_dict_list = []
+        # for member in self._members:
+        #     member_dict = member.to_dict()
+        #     member_dict_list.append(member_dict)
+        #
+        # data["members"] = member_dict_list
 
         return data
