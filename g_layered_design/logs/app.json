@@ -1,0 +1,40 @@
+2026-04-02 18:28:53,497 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 1: Test Feature ticket assigned to Declan [OPEN] -> Add a way to add a ticket
+2026-04-02 18:28:53,497 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 3: Test ticket assigned to Anthony [OPEN]
+2026-04-02 18:28:53,497 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 4: Test ticket2 assigned to Michael [RESOLVED]
+2026-04-02 18:28:53,497 - __main__ - INFO - assign_ticket - Assigned ticket to Alison - ticket details: [FEATURE] 6: Test Feature ticket2 assigned to Alison [CLOSED] -> Add a way to delete a ticket
+2026-04-02 18:28:53,498 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 7: Test ticket3 assigned to Anthony [IN_PROGRESS]
+2026-04-02 18:28:53,498 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 8: Test Feature ticket6 assigned to Declan [CLOSED] -> Add a way to edit a ticket
+2026-04-02 18:28:53,498 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 9: Test ticket4 assigned to Michael [CLOSED]
+2026-04-02 18:28:53,498 - __main__ - INFO - read_file - Unassigned ticket added to queue: 10: Test ticket6 - unassigned [OPEN]
+2026-04-02 18:28:53,498 - __main__ - INFO - read_file - Unassigned ticket added to queue: 11: Test ticket7 - unassigned [OPEN]
+2026-04-02 18:29:08,669 - __main__ - INFO - assign_ticket - Assigned ticket to Alvin - ticket details: 10: Test ticket6 assigned to Alvin [OPEN]
+2026-04-02 18:29:14,158 - __main__ - INFO - display_ticket_list - Ticket details viewed: 11: Test ticket7 - unassigned [OPEN]
+2026-04-16 12:14:58,004 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 1: Test Feature ticket assigned to Declan [OPEN] -> Add a way to add a ticket
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 3: Test ticket assigned to Anthony [OPEN]
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 4: Test ticket2 assigned to Michael [RESOLVED]
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Alison - ticket details: [FEATURE] 6: Test Feature ticket2 assigned to Alison [CLOSED] -> Add a way to delete a ticket
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 7: Test ticket3 assigned to Anthony [IN_PROGRESS]
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 8: Test Feature ticket6 assigned to Declan [CLOSED] -> Add a way to edit a ticket
+2026-04-16 12:14:58,006 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 9: Test ticket4 assigned to Michael [CLOSED]
+2026-04-16 12:14:58,006 - __main__ - INFO - read_file - Unassigned ticket added to queue: 10: Test ticket6 - unassigned [OPEN]
+2026-04-16 12:14:58,006 - __main__ - INFO - read_file - Unassigned ticket added to queue: 11: Test ticket7 - unassigned [OPEN]
+2026-04-16 12:15:47,670 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 1: Test Feature ticket assigned to Declan [OPEN] -> Add a way to add a ticket
+2026-04-16 12:15:47,670 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 3: Test ticket assigned to Anthony [OPEN]
+2026-04-16 12:15:47,670 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 4: Test ticket2 assigned to Michael [RESOLVED]
+2026-04-16 12:15:47,671 - __main__ - INFO - assign_ticket - Assigned ticket to Alison - ticket details: [FEATURE] 6: Test Feature ticket2 assigned to Alison [CLOSED] -> Add a way to delete a ticket
+2026-04-16 12:15:47,671 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 7: Test ticket3 assigned to Anthony [IN_PROGRESS]
+2026-04-16 12:15:47,671 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 8: Test Feature ticket6 assigned to Declan [CLOSED] -> Add a way to edit a ticket
+2026-04-16 12:15:47,671 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 9: Test ticket4 assigned to Michael [CLOSED]
+2026-04-16 12:15:47,671 - __main__ - INFO - read_file - Unassigned ticket added to queue: 10: Test ticket6 - unassigned [OPEN]
+2026-04-16 12:15:47,672 - __main__ - INFO - read_file - Unassigned ticket added to queue: 11: Test ticket7 - unassigned [OPEN]
+2026-04-16 12:17:46,578 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 1: Test Feature ticket assigned to Declan [OPEN] -> Add a way to add a ticket
+2026-04-16 12:17:46,581 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 3: Test ticket assigned to Anthony [OPEN]
+2026-04-16 12:17:46,582 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 4: Test ticket2 assigned to Michael [RESOLVED]
+2026-04-16 12:17:46,583 - __main__ - INFO - assign_ticket - Assigned ticket to Alison - ticket details: [FEATURE] 6: Test Feature ticket2 assigned to Alison [CLOSED] -> Add a way to delete a ticket
+2026-04-16 12:17:46,583 - __main__ - INFO - assign_ticket - Assigned ticket to Anthony - ticket details: 7: Test ticket3 assigned to Anthony [IN_PROGRESS]
+2026-04-16 12:17:46,584 - __main__ - INFO - assign_ticket - Assigned ticket to Declan - ticket details: [FEATURE] 8: Test Feature ticket6 assigned to Declan [CLOSED] -> Add a way to edit a ticket
+2026-04-16 12:17:46,584 - __main__ - INFO - assign_ticket - Assigned ticket to Michael - ticket details: 9: Test ticket4 assigned to Michael [CLOSED]
+2026-04-16 12:17:46,584 - __main__ - INFO - read_file - Unassigned ticket added to queue: 10: Test ticket6 - unassigned [OPEN]
+2026-04-16 12:17:46,585 - __main__ - INFO - read_file - Unassigned ticket added to queue: 11: Test ticket7 - unassigned [OPEN]
+2026-04-16 12:17:51,910 - __main__ - INFO - display_tickets_for_agent - Ticket details viewed: 3: Test ticket assigned to Anthony [OPEN]
+2026-04-16 12:17:51,911 - __main__ - INFO - display_tickets_for_agent - Ticket details viewed: 7: Test ticket3 assigned to Anthony [IN_PROGRESS]

@@ -1,0 +1,9 @@
+FEATURE%%1%%Test Feature ticket%%description of ticket%%OPEN%%Declan%%Add a way to add a ticket%%PENDING
+TICKET%%3%%Test ticket%%description of ticket%%OPEN%%Anthony
+TICKET%%4%%Test ticket2%%description of ticket%%RESOLVED%%Michael
+FEATURE%%6%%Test Feature ticket2%%description of ticket%%RESOLVED%%Alison%%Add a way to delete a ticket%%REJECTED
+TICKET%%7%%Test ticket3%%description of ticket%%IN_PROGRESS%%Anthony
+FEATURE%%8%%Test Feature ticket6%%description of ticket%%OPEN%%Declan%%Add a way to edit a ticket%%APPROVED
+TICKET%%9%%Test ticket4%%description of ticket%%CLOSED%%Michael
+TICKET%%10%%Test ticket6%%description of ticket%%OPEN%%
+TICKET%%11%%Test ticket7%%description of another ticket%%OPEN%%
