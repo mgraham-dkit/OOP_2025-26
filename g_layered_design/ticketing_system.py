@@ -128,9 +128,13 @@ def display_ticket_list(ticket_list: list[Ticket]) -> None:
         logger.info(f"Ticket details viewed: {ticket}")
 
 
-def display_agents(assigned_tickets: dict[str, list[Ticket]]) -> None:
-    for i, agent in enumerate(assigned_tickets, start=1):
-        print(f"{i}) {agent}")
+def display_agents(ticket_service: TicketService) -> None:
+    agents = ticket_service.get_agents()
+    if not agents:
+        print("No agents currently registered to Tickets")
+    else:
+        for i, agent in enumerate(agents, start=1):
+            print(f"{i}) {agent}")
 
 
 def display_tickets_for_agent(ticket_service: TicketService) -> None:
@@ -206,7 +210,7 @@ if __name__ == "__main__":
         choice = input()
         match choice.lower():
             case "1":
-                display_agents(assigned)
+                display_agents(ticket_service)
             case "2":
                 display_tickets_for_agent(ticket_service)
             case "3":

@@ -8,3 +8,6 @@ class TicketService:
             return None
 
         return  self.__assigned_tickets[agent.lower()]
+
+    def get_agents(self):
+        return list(self.__assigned_tickets.keys())
