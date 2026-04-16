@@ -139,7 +139,7 @@ def display_tickets_for_agent(assigned_tickets: dict[str, list[Ticket]]) -> None
         print("No agent matching supplied name registered in system")
         return
 
-    agent_tickets = assigned_tickets[agent]
+    agent_tickets = assigned_tickets[agent.lower()]
     for i, ticket in enumerate(agent_tickets, 1):
         print(f"{i}) {ticket}")
         logger.info(f"Ticket details viewed: {ticket}")
