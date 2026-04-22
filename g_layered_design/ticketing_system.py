@@ -102,21 +102,13 @@ def read_file(filename: str) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
             if assigned_agent == "":
                 unassigned_tickets.append(ticket)
                 # Compliance logging - ticket stored
-                logger.info(f"Unassigned ticket added to queue: {ticket}")
+                logger.info(f"Unassigned ticket retrieved from file and added to queue: {ticket}")
             else:
-                assign_ticket(assigned_agent, assigned_tickets, ticket)
+                agent_list = assigned_tickets.setdefault(assigned_agent.lower(), [])
+                agent_list.append(ticket)
+                logger.info(f"Assigned ticket retrieved from file and added to queue for {assigned_agent}: {ticket}")
 
     return unassigned_tickets, assigned_tickets
-
-
-def assign_ticket(assigned_agent: str, assigned_tickets: dict[str, list[Ticket]], ticket: Ticket):
-    # Otherwise, place in dictionary, associated with assigned agent
-    agent_list = assigned_tickets.get(assigned_agent.lower(), [])
-    agent_list.append(ticket)
-    assigned_tickets[assigned_agent.lower()] = agent_list
-    # Compliance logging - ticket stored and assigned
-    logger.info(f"Assigned ticket to {assigned_agent} - ticket details: {ticket}")
-
 
 def display_ticket_list(ticket_service: TicketService) -> None:
     ticket_list = ticket_service.get_unassigned_tickets()
@@ -150,26 +142,16 @@ def display_tickets_for_agent(ticket_service: TicketService) -> None:
             logger.info(f"Ticket details viewed: {ticket}")
 
 
-def assign_next_ticket(unassigned_list: list[Ticket], assigned_dict: dict[str, list[Ticket]]) -> None:
-    if len(unassigned_list) == 0:
-        logger.info("No tickets available to be assigned")
-        return
-
-    next_ticket = unassigned_list[0]
-    print(f"Ticket to be assigned: {next_ticket}")
-
-    agent = ""
+def assign_next_ticket(ticket_service: TicketService) -> None:
+    agent = input("Enter agent name to assign next ticket: ")
     try:
-        agent = input("Please enter agent name to be assigned a ticket: ")
-        # Link to specified agent
-        next_ticket.assign_to(agent)
-        # Add to assigned dictionary
-        assign_ticket(agent, assigned_dict, next_ticket)
-        # Remove from unassigned list - do this last in case something goes wrong along the way
-        unassigned_list.pop(0)
+        assigned = ticket_service.assign_next_ticket(agent)
+        if not assigned:
+            logger.info(f"No tickets currently available - could not assign to {agent}")
+            print("No unassigned tickets available")
     except TicketException as e:
         logger.error(f"Attempting to assign previously assigned ticket: {e}")
-        print(f"Cannot assign ticket - ticket is already assigned to {next_ticket.get_assigned_agent()}")
+        print(f"Cannot assign ticket - ticket is already assigned")
     except ValueError as e:
         logger.error(f"Attempting to assign ticket to illegal agent value: {e}")
         print(f"Cannot assign ticket - agent \"{agent}\" is invalid. Please try again with a different agent")
@@ -192,13 +174,13 @@ if __name__ == "__main__":
     while not valid:
         try:
             filename = input("Please enter ticket data filename: ")
-            unassigned, assigned = read_file(filename)
+            unassigned_list, assigned_dict = read_file(filename)
             valid = True
         except FileNotFoundError as e:
             logger.warning(f"Cannot open file {filename}")
             print(f"File {filename} cannot be found. Please enter a new filename.")
 
-    ticket_service = TicketService(assigned, unassigned)
+    ticket_service = TicketService(assigned_dict, unassigned_list)
 
     # Run main application logic
     keep_running = True
@@ -214,7 +196,7 @@ if __name__ == "__main__":
             case "3":
                 display_ticket_list(ticket_service)
             case "4":
-                assign_next_ticket(unassigned, assigned)
+                assign_next_ticket(ticket_service)
             case "exit":
                 keep_running = False
             case _:
