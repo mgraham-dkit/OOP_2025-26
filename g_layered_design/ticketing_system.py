@@ -118,11 +118,13 @@ def assign_ticket(assigned_agent: str, assigned_tickets: dict[str, list[Ticket]]
     logger.info(f"Assigned ticket to {assigned_agent} - ticket details: {ticket}")
 
 
-def display_ticket_list(ticket_list: list[Ticket]) -> None:
+def display_ticket_list(ticket_service: TicketService) -> None:
+    ticket_list = ticket_service.get_unassigned_tickets()
     if len(ticket_list) == 0:
-        print("No tickets found")
+        print("No unassigned tickets found")
         return
 
+    print("Unassigned tickets: ")
     for i, ticket in enumerate(ticket_list, 1):
         print(f"{i}) {ticket}")
         logger.info(f"Ticket details viewed: {ticket}")
@@ -210,8 +212,7 @@ if __name__ == "__main__":
             case "2":
                 display_tickets_for_agent(ticket_service)
             case "3":
-                print("Unassigned tickets: ")
-                display_ticket_list(unassigned)
+                display_ticket_list(ticket_service)
             case "4":
                 assign_next_ticket(unassigned, assigned)
             case "exit":

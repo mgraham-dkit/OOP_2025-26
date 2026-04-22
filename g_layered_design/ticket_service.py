@@ -12,3 +12,6 @@ class TicketService:
 
     def get_agents(self):
         return list(self.__assigned_tickets.keys())
+
+    def get_unassigned_tickets(self) -> list[Ticket]:
+        return list(self.__unassigned_tickets)
