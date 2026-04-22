@@ -79,7 +79,7 @@ def build_feature_request(approval_status: str, assigned_to: str, desc: str, lin
     return ticket
 
 
-def build_ticket(assigned_to: str, desc: str, status: str, ticket_id: int, title: str):
+def build_ticket(assigned_to: str, desc: str, status: str, ticket_id: int, title: str) -> Ticket:
     ticket = Ticket(ticket_id, title, desc)
     ticket.update_status(status)
     if assigned_to != "":
