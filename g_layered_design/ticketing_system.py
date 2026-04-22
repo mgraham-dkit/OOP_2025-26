@@ -196,11 +196,7 @@ if __name__ == "__main__":
             logger.warning(f"Cannot open file {filename}")
             print(f"File {filename} cannot be found. Please enter a new filename.")
 
-    print("Unassigned data:")
-    for t in unassigned:
-        print(t)
-
-    ticket_service = TicketService(assigned)
+    ticket_service = TicketService(assigned, unassigned)
 
     # Run main application logic
     keep_running = True
