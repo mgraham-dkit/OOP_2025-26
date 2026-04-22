@@ -87,6 +87,20 @@ def build_ticket(assigned_to: str, desc: str, status: str, ticket_id: int, title
     return ticket
 
 
+def load_ticket_model() -> TicketService | None:
+    # Read file:
+    filename = ""
+    try:
+        filename = input("Please enter ticket data filename: ")
+        unassigned, assigned = read_file(filename)
+        ticket_service = TicketService(assigned, unassigned)
+        return ticket_service
+    except FileNotFoundError as e:
+        logger.warning(f"Cannot open file {filename}")
+        print(f"File {filename} cannot be found. Please enter a new filename.")
+        return None
+
+
 def read_file(filename: str) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
     unassigned_tickets = []
     assigned_tickets = {}
@@ -167,21 +181,7 @@ def display_menu() -> None:
     print("exit) Exit the program")
 
 
-if __name__ == "__main__":
-    # Read file:
-    valid = False
-    filename = ""
-    while not valid:
-        try:
-            filename = input("Please enter ticket data filename: ")
-            unassigned_list, assigned_dict = read_file(filename)
-            valid = True
-        except FileNotFoundError as e:
-            logger.warning(f"Cannot open file {filename}")
-            print(f"File {filename} cannot be found. Please enter a new filename.")
-
-    ticket_service = TicketService(assigned_dict, unassigned_list)
-
+def run_ui(ticket_service: TicketService):
     # Run main application logic
     keep_running = True
     while keep_running:
@@ -201,3 +201,14 @@ if __name__ == "__main__":
                 keep_running = False
             case _:
                 print("Invalid option selected")
+
+
+if __name__ == "__main__":
+    valid = False
+    ticket_service = None
+    while not valid:
+        ticket_service = load_ticket_model()
+        if ticket_service:
+            valid = True
+
+    run_ui(ticket_service)
