@@ -75,3 +75,27 @@ class TicketDataAccess:
         if assigned_to != "":
             ticket.assign_to(assigned_to)
         return ticket
+
+    def read_file(self, filename: str) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+        unassigned_tickets = []
+        assigned_tickets = {}
+
+        # Read file
+        with open(filename) as file:
+            for line in file:
+                ticket = self.parse_ticket(line)
+                if ticket is None:
+                    continue
+                # If ticket is not assigned, place in list of unassigned tickets
+                assigned_agent = ticket.get_assigned_agent()
+                if assigned_agent == "":
+                    unassigned_tickets.append(ticket)
+                    # Compliance logging - ticket stored
+                    logger.info(f"Unassigned ticket retrieved from file and added to queue: {ticket}")
+                else:
+                    agent_list = assigned_tickets.setdefault(assigned_agent.lower(), [])
+                    agent_list.append(ticket)
+                    logger.info(
+                        f"Assigned ticket retrieved from file and added to queue for {assigned_agent}: {ticket}")
+
+        return unassigned_tickets, assigned_tickets
