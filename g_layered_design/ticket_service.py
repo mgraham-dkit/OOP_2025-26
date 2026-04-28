@@ -10,10 +10,17 @@ class TicketService:
         self.__unassigned_tickets = list.copy(unassigned) if unassigned else []
 
     def get_tickets_for_agent(self, agent: str) -> list[Ticket] | None:
+        TicketService.validate_agent(agent)
+
         if agent.lower() not in self.__assigned_tickets:
             return None
 
         return  self.__assigned_tickets[agent.lower()]
+
+    @staticmethod
+    def validate_agent(agent: str):
+        if not agent:
+            raise ValueError("Agent name cannot be blank/None")
 
     def get_agents(self) -> list[str]:
         return list(self.__assigned_tickets.keys())
@@ -22,6 +29,8 @@ class TicketService:
         return list(self.__unassigned_tickets)
 
     def _assign_ticket(self, agent: str, ticket: Ticket) -> None:
+        TicketService.validate_agent(agent)
+
         # Link ticket to specified agent
         ticket.assign_to(agent)
 
@@ -35,8 +44,7 @@ class TicketService:
         logger.info(f"Assigned ticket to {agent} - ticket details: {ticket}")
 
     def assign_next_ticket(self, agent: str) -> bool:
-        if not agent:
-            raise ValueError("Cannot assign to a blank/None agent name")
+        TicketService.validate_agent(agent)
 
         if len(self.__unassigned_tickets) == 0:
             return False
