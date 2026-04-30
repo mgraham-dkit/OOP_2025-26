@@ -1,13 +1,16 @@
 import logging
 
 from tickets import Ticket
+from ticket_persistence import TicketDataAccess
 
 logger = logging.getLogger(__name__)
 
 class TicketService:
-    def __init__(self, assigned: dict[str, list[Ticket]] = None, unassigned: list[Ticket] = None):
-        self.__assigned_tickets = dict.copy(assigned) if assigned else {}
-        self.__unassigned_tickets = list.copy(unassigned) if unassigned else []
+    def __init__(self, ticket_data_access: TicketDataAccess = None):
+        self._data_access = ticket_data_access
+
+        self.__assigned_tickets = {}
+        self.__unassigned_tickets = []
 
     def get_tickets_for_agent(self, agent: str) -> list[Ticket] | None:
         TicketService.validate_agent(agent)
