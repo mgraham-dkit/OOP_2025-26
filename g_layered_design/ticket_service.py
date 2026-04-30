@@ -1,16 +1,22 @@
 import logging
 
 from tickets import Ticket
-from ticket_persistence import TicketDataAccess
+from ticket_persistence import ITicketDataAccess
 
 logger = logging.getLogger(__name__)
 
 class TicketService:
-    def __init__(self, ticket_data_access: TicketDataAccess = None):
+    def __init__(self, ticket_data_access: ITicketDataAccess  = None):
         self._data_access = ticket_data_access
 
         self.__assigned_tickets = {}
         self.__unassigned_tickets = []
+
+    def load(self):
+        if not self._data_access:
+            raise AttributeError("No TicketDataAccess class present - cannot load data")
+
+        self.__assigned_tickets, self.__unassigned_tickets = self._data_access.load_tickets()
 
     def get_tickets_for_agent(self, agent: str) -> list[Ticket] | None:
         TicketService.validate_agent(agent)

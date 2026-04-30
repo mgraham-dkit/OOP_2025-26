@@ -1,5 +1,6 @@
 import logging
 import os.path
+from abc import ABC, abstractmethod
 
 from tickets import Ticket
 from tickets import FeatureRequest
@@ -8,7 +9,21 @@ from tickets import TicketException
 
 logger = logging.getLogger(__name__)
 
-class TicketDataAccess:
+
+class ITicketDataAccess(ABC):
+    @abstractmethod
+    def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+        pass
+
+class BlankTicketDataAccess(ITicketDataAccess):
+    def __init__(self, filename):
+        pass
+
+    def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+        return [], {}
+
+
+class TicketDataAccess(ITicketDataAccess):
     def __init__(self, filename: str):
         if not filename:
             raise ValueError("Cannot read from None/blank file")
@@ -86,7 +101,7 @@ class TicketDataAccess:
             ticket.assign_to(assigned_to)
         return ticket
 
-    def read_file(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+    def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
         unassigned_tickets = []
         assigned_tickets = {}
 

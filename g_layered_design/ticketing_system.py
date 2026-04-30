@@ -1,4 +1,5 @@
 from g_layered_design.ticket_persistence import TicketDataAccess
+from ticket_persistence import BlankTicketDataAccess
 from tickets import Ticket
 from tickets import FeatureRequest
 from tickets import TicketException
@@ -23,8 +24,8 @@ def load_ticket_model() -> TicketService | None:
     try:
         filename = input("Please enter ticket data filename: ")
         ticket_dao = TicketDataAccess(filename)
-        unassigned, assigned = ticket_dao.read_file()
-        ticket_service = TicketService(assigned, unassigned)
+        ticket_service = TicketService(ticket_dao)
+        ticket_service.load()
         return ticket_service
     except FileNotFoundError as e:
         logger.warning(f"Cannot open file {filename}")
