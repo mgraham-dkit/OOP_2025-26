@@ -22,8 +22,8 @@ def load_ticket_model() -> TicketService | None:
     filename = ""
     try:
         filename = input("Please enter ticket data filename: ")
-        ticket_dao = TicketDataAccess()
-        unassigned, assigned = ticket_dao.read_file(filename)
+        ticket_dao = TicketDataAccess(filename)
+        unassigned, assigned = ticket_dao.read_file()
         ticket_service = TicketService(assigned, unassigned)
         return ticket_service
     except FileNotFoundError as e:

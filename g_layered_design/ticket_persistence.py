@@ -1,4 +1,5 @@
 import logging
+import os.path
 
 from tickets import Ticket
 from tickets import FeatureRequest
@@ -8,6 +9,15 @@ from tickets import TicketException
 logger = logging.getLogger(__name__)
 
 class TicketDataAccess:
+    def __init__(self, filename: str):
+        if not filename:
+            raise ValueError("Cannot read from None/blank file")
+
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"No such file: {filename}")
+
+        self._filename = filename
+
     def parse_ticket(self, text: str) -> Ticket | None:
         line = text.strip().split("%%")
         # Line formats:
@@ -76,12 +86,12 @@ class TicketDataAccess:
             ticket.assign_to(assigned_to)
         return ticket
 
-    def read_file(self, filename: str) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+    def read_file(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
         unassigned_tickets = []
         assigned_tickets = {}
 
         # Read file
-        with open(filename) as file:
+        with open(self._filename) as file:
             for line in file:
                 ticket = self.parse_ticket(line)
                 if ticket is None:
