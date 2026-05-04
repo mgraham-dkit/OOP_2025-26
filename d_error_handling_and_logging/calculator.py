@@ -8,7 +8,7 @@ def configure_logging(logging_level: int) -> None:
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging_level, handlers=[console_handler])
 
 configure_logging(logging.DEBUG)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 def multiply() -> None:
     valid = False
