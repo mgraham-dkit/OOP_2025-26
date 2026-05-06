@@ -16,7 +16,7 @@ class TicketService:
         if not self._data_access:
             raise AttributeError("No TicketDataAccess class present - cannot load data")
 
-        self.__assigned_tickets, self.__unassigned_tickets = self._data_access.load_tickets()
+        self.__unassigned_tickets, self.__assigned_tickets = self._data_access.load_tickets()
 
     def get_tickets_for_agent(self, agent: str) -> list[Ticket] | None:
         TicketService.validate_agent(agent)
