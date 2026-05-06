@@ -2,6 +2,7 @@ import json
 import logging
 import os.path
 from abc import ABC, abstractmethod
+from typing import Any
 
 from tickets import Ticket
 from tickets import FeatureRequest
@@ -24,7 +25,7 @@ class BlankTicketDataAccess(ITicketDataAccess):
         return [], {}
 
 
-class JsonTicketDataAccess:
+class JsonTicketDataAccess(ITicketDataAccess):
     def __init__(self, filename: str):
         if not filename:
             raise ValueError("Cannot read from None/blank file")
@@ -33,6 +34,41 @@ class JsonTicketDataAccess:
             raise FileNotFoundError(f"No such file: {filename}")
 
         self._filename = filename
+
+    def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
+        with open(self._filename) as file:
+            ticket_data = json.load(file)
+
+            assigned_data_dict = ticket_data["assigned"]
+            assigned_tickets = self.parse_assigned(assigned_data_dict)
+
+            unassigned_data_dict = ticket_data["unassigned"]
+            unassigned_tickets = self.parse_ticket_list(unassigned_data_dict)
+
+            return unassigned_tickets, assigned_tickets
+
+    def parse_ticket_list(self, ticket_data_dict) -> list[Any]:
+        ticket_list = []
+        for ticket in ticket_data_dict:
+            try:
+                if ticket["type"] == "FeatureRequest":
+                    ticket_list.append(FeatureRequest.from_dict(ticket))
+                else:
+                    ticket_list.append(Ticket.from_dict(ticket))
+            except ValueError as e:
+                logger.warning(f"Error when parsing Ticket from JSON: {e} - Ticket details: {ticket}")
+        return ticket_list
+
+    def parse_assigned(self, assigned_data_dict) -> dict[Any, Any]:
+        assigned_tickets = {}
+
+        # Parse each agent's ticket list
+        for agent, agent_ticket_dicts in assigned_data_dict.items():
+            agent_tickets = self.parse_ticket_list(agent_ticket_dicts)
+            # Add the agent and their tickets to the assigned tickets dictionary
+            assigned_tickets[agent] = agent_tickets
+
+        return assigned_tickets
 
     def store(self, assigned: dict[str, list[Ticket]], unassigned: list[Ticket]) -> None:
         assigned_tickets = {}
