@@ -1,4 +1,4 @@
-from g_layered_design.ticket_persistence import TicketDataAccess
+from ticket_persistence import TicketDataAccess
 from ticket_persistence import BlankTicketDataAccess
 from tickets import Ticket
 from tickets import FeatureRequest
