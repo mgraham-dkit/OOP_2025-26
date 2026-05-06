@@ -141,7 +141,9 @@ class Ticket:
             status = data["status"]
 
             ticket = cls(ticket_id, title, description)
-            ticket.assign_to(assigned_to)
+            if assigned_to:
+                ticket.assign_to(assigned_to)
+
             ticket.update_status(status)
             return ticket
 
