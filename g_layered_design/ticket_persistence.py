@@ -1,3 +1,4 @@
+import json
 import logging
 import os.path
 from abc import ABC, abstractmethod
@@ -21,6 +22,32 @@ class BlankTicketDataAccess(ITicketDataAccess):
 
     def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
         return [], {}
+
+
+class JsonTicketDataAccess:
+    def __init__(self, filename: str):
+        if not filename:
+            raise ValueError("Cannot read from None/blank file")
+
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"No such file: {filename}")
+
+        self._filename = filename
+
+    def store(self, assigned: dict[str, list[Ticket]], unassigned: list[Ticket]) -> None:
+        assigned_tickets = {}
+        for key, value in assigned.items():
+            tickets = [ticket.to_dict() for ticket in value]
+            assigned_tickets[key] = tickets
+
+        unassigned_tickets = [ticket.to_dict() for ticket in unassigned]
+
+        tickets = {
+            "assigned" : assigned_tickets,
+            "unassigned": unassigned_tickets
+        }
+        with open(self._filename, "w") as file:
+            json.dump(tickets, file, indent=4)
 
 
 class TicketDataAccess(ITicketDataAccess):

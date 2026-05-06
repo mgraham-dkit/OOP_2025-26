@@ -1,5 +1,6 @@
 from __future__ import annotations
 from types import NotImplementedType
+from typing import Any, Self
 
 
 class TicketException(ValueError):
@@ -113,6 +114,40 @@ class Ticket:
 
         self.__status = new_status
 
+    def to_dict(self) -> dict[str, int | str]:
+        data = {}
+
+        data["type"] = self.__class__.__name__
+
+        data["ticket_id"] = self._ticket_id
+        data["title"] = self._title
+        data["description"] = self._description
+        data["assigned_to"] = self._assigned_to
+        data["status"] = self.__status
+
+        return data
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Self:
+        try:
+            if data["type"] != cls.__name__:
+                raise ValueError(
+                    f"Invalid type value ({data["type"]}) within dict  - {cls.__name__} cannot deserialise")
+
+            ticket_id = data["ticket_id"]
+            title = data["title"]
+            description = data["description"]
+            assigned_to = data["assigned_to"]
+            status = data["status"]
+
+            ticket = cls(ticket_id, title, description)
+            ticket.assign_to(assigned_to)
+            ticket.update_status(status)
+            return ticket
+
+        except KeyError as e:
+            raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
+
 
 class FeatureRequest(Ticket):
     _PENDING_STATUS= "PENDING"
@@ -142,3 +177,34 @@ class FeatureRequest(Ticket):
 
     def get_approval_status(self) -> str:
         return self.__approval_status
+
+    def to_dict(self) -> dict[str, int|str]:
+        data = super().to_dict()
+
+        data["approval_status"] = self.__approval_status
+        data["requested_feature"] = self._requested_feature
+
+        return data
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Self:
+        try:
+            if data["type"] != cls.__name__:
+                raise ValueError(f"Invalid type value ({data["type"]}) within dict  - {cls.__name__} cannot deserialise")
+
+            ticket_id = data["ticket_id"]
+            title = data["title"]
+            description = data["description"]
+            assigned_to = data["assigned_to"]
+            status = data["status"]
+            approval_status = data["approval_status"]
+            requested_feature = data["requested_feature"]
+
+            feat_req = cls(ticket_id, title, description, requested_feature)
+            feat_req.assign_to(assigned_to)
+            feat_req.update_status(status)
+            feat_req.__approval_status = approval_status
+            return feat_req
+
+        except KeyError as e:
+            raise ValueError(f"JSON error occurred when building {cls.__name__} - cannot find key {e}")
