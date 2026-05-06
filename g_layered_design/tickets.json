@@ -1,0 +1,92 @@
+{
+    "assigned": {
+        "declan": [
+            {
+                "type": "FeatureRequest",
+                "ticket_id": 1,
+                "title": "Test Feature ticket",
+                "description": "description of ticket",
+                "assigned_to": "Declan",
+                "status": "OPEN",
+                "approval_status": "PENDING",
+                "requested_feature": "Add a way to add a ticket"
+            },
+            {
+                "type": "FeatureRequest",
+                "ticket_id": 8,
+                "title": "Test Feature ticket6",
+                "description": "description of ticket",
+                "assigned_to": "Declan",
+                "status": "CLOSED",
+                "approval_status": "APPROVED",
+                "requested_feature": "Add a way to edit a ticket"
+            }
+        ],
+        "anthony": [
+            {
+                "type": "Ticket",
+                "ticket_id": 3,
+                "title": "Test ticket",
+                "description": "description of ticket",
+                "assigned_to": "Anthony",
+                "status": "OPEN"
+            },
+            {
+                "type": "Ticket",
+                "ticket_id": 7,
+                "title": "Test ticket3",
+                "description": "description of ticket",
+                "assigned_to": "Anthony",
+                "status": "IN_PROGRESS"
+            }
+        ],
+        "michael": [
+            {
+                "type": "Ticket",
+                "ticket_id": 4,
+                "title": "Test ticket2",
+                "description": "description of ticket",
+                "assigned_to": "Michael",
+                "status": "RESOLVED"
+            },
+            {
+                "type": "Ticket",
+                "ticket_id": 9,
+                "title": "Test ticket4",
+                "description": "description of ticket",
+                "assigned_to": "Michael",
+                "status": "CLOSED"
+            }
+        ],
+        "alison": [
+            {
+                "type": "FeatureRequest",
+                "ticket_id": 6,
+                "title": "Test Feature ticket2",
+                "description": "description of ticket",
+                "assigned_to": "Alison",
+                "status": "CLOSED",
+                "approval_status": "REJECTED",
+                "requested_feature": "Add a way to delete a ticket"
+            }
+        ]
+    },
+    "unassigned": [
+        {
+            "type": "Ticket",
+            "ticket_id": 10,
+            "title": "Test ticket6",
+            "description": "description of ticket",
+            "assigned_to": "",
+            "status": "OPEN"
+        },
+        {
+            "type": "Ticket",
+            "ticket_id": 11,
+            "title": "Test ticket7",
+            "description": "description of another ticket",
+            "assigned_to": "",
+            "status": "OPEN"
+        }
+    ]
+}
