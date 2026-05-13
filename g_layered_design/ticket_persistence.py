@@ -17,12 +17,19 @@ class ITicketDataAccess(ABC):
     def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
         pass
 
+    @abstractmethod
+    def store_tickets(self, unassigned: list[Ticket] ,assigned: dict[str, list[Ticket]]):
+        pass
+
 class BlankTicketDataAccess(ITicketDataAccess):
     def __init__(self, filename):
         pass
 
     def load_tickets(self) -> tuple[list[Ticket], dict[str, list[Ticket]]]:
         return [], {}
+
+    def store_tickets(self, unassigned: list[Ticket] ,assigned: dict[str, list[Ticket]]):
+        pass
 
 
 class JsonTicketDataAccess(ITicketDataAccess):
@@ -70,7 +77,7 @@ class JsonTicketDataAccess(ITicketDataAccess):
 
         return assigned_tickets
 
-    def store(self, assigned: dict[str, list[Ticket]], unassigned: list[Ticket]) -> None:
+    def store_tickets(self, assigned: dict[str, list[Ticket]], unassigned: list[Ticket]) -> None:
         assigned_tickets = {}
         for key, value in assigned.items():
             tickets = [ticket.to_dict() for ticket in value]
@@ -187,3 +194,6 @@ class TicketDataAccess(ITicketDataAccess):
                         f"Assigned ticket retrieved from file and added to queue for {assigned_agent}: {ticket}")
 
         return unassigned_tickets, assigned_tickets
+
+    def store_tickets(self, unassigned: list[Ticket], assigned: dict[str, list[Ticket]]):
+        pass

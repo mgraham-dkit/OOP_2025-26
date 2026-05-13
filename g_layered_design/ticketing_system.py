@@ -1,3 +1,4 @@
+from g_layered_design.ticket_persistence import JsonTicketDataAccess
 from ticket_persistence import TicketDataAccess
 from ticket_persistence import BlankTicketDataAccess
 from tickets import Ticket
@@ -23,7 +24,7 @@ def load_ticket_model() -> TicketService | None:
     filename = ""
     try:
         filename = input("Please enter ticket data filename: ")
-        ticket_dao = TicketDataAccess(filename)
+        ticket_dao = JsonTicketDataAccess(filename)
         ticket_service = TicketService(ticket_dao)
         ticket_service.load()
         return ticket_service
